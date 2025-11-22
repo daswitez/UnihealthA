@@ -1,21 +1,299 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  schemas  = ["app"]
 }
 
-// Example model - customize as needed
+// ===========================
+// 1) Seguridad y catálogos
+// ===========================
+
+model Role {
+  id          BigInt  @id @default(autoincrement())
+  name        String  @unique @map("nombre") @db.VarChar(32)
+  description String? @map("descripcion")
+  users       User[]
+
+  @@map("roles")
+  @@schema("app")
+}
+
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           BigInt    @id @default(autoincrement())
+  email        String    @unique @db.VarChar(254)
+  passwordHash String    @map("pass_hash")
+  roleId       BigInt    @map("rol_id")
+  isActive     Boolean   @default(true) @map("activo")
+  createdAt    DateTime  @default(now()) @map("creado_en") @db.Timestamptz
+  updatedAt    DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz
+  lastLogin    DateTime? @map("ultimo_login") @db.Timestamptz
+
+  role           Role            @relation(fields: [roleId], references: [id])
+  consent        Consent[]
+  patientProfile PatientProfile?
+
+  // Relaciones clínicas
+  createdRecords ClinicalRecord[] @relation("CreatedRecords")
+  patientRecords ClinicalRecord[] @relation("PatientRecords")
+
+  takenVitals   Vitals[] @relation("TakenVitals")
+  patientVitals Vitals[] @relation("PatientVitals")
+
+  createdAttachments Attachment[]
+
+  // Alertas
+  patientAlerts  Alert[]      @relation("PatientAlerts")
+  assignedAlerts Alert[]      @relation("AssignedAlerts")
+  alertEvents    AlertEvent[]
+
+  // Agenda y Citas
+  schedule            Schedule[]
+  patientAppointments Appointment[] @relation("PatientAppointments")
+  nurseAppointments   Appointment[] @relation("NurseAppointments")
+
+  @@index([roleId])
+  @@map("usuarios")
+  @@schema("app")
+}
+
+model Consent {
+  id         BigInt   @id @default(autoincrement())
+  userId     BigInt   @map("usuario_id")
+  version    String   @db.VarChar(20)
+  acceptedAt DateTime @default(now()) @map("aceptado_en") @db.Timestamptz
+  ip         String?  @db.Inet
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("consentimientos")
+  @@schema("app")
+}
+
+// ===========================
+// 2) Perfil e Historia Clínica
+// ===========================
+
+model PatientProfile {
+  userId           BigInt    @id @map("usuario_id")
+  firstName        String    @map("nombres") @db.VarChar(100)
+  lastName         String    @map("apellidos") @db.VarChar(100)
+  dob              DateTime? @map("fecha_nacimiento") @db.Date
+  gender           String?   @map("sexo") @db.Char(1)
+  emergencyContact String?   @map("contacto_emergencia") @db.VarChar(100)
+  allergies        String?   @map("alergias")
+  history          String?   @map("antecedentes")
+  createdAt        DateTime  @default(now()) @map("creado_en") @db.Timestamptz
+  updatedAt        DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("perfiles_paciente")
+  @@schema("app")
+}
+
+model NoteType {
+  id       BigInt           @id @default(autoincrement())
+  code     String           @unique @map("codigo") @db.VarChar(32)
+  name     String           @map("nombre") @db.VarChar(80)
+  isActive Boolean          @default(true) @map("activo")
+  records  ClinicalRecord[]
+
+  @@map("tipos_nota")
+  @@schema("app")
+}
+
+model ClinicalRecord {
+  id          BigInt   @id @default(autoincrement())
+  patientId   BigInt   @map("paciente_id")
+  createdById BigInt   @map("creado_por_id")
+  noteTypeId  BigInt   @map("tipo_nota_id")
+  note        String?  @map("nota")
+  createdAt   DateTime @default(now()) @map("creado_en") @db.Timestamptz
+  updatedAt   DateTime @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz
+
+  patient   User     @relation("PatientRecords", fields: [patientId], references: [id], onDelete: Cascade)
+  createdBy User     @relation("CreatedRecords", fields: [createdById], references: [id])
+  noteType  NoteType @relation(fields: [noteTypeId], references: [id])
+
+  @@index([patientId])
+  @@index([noteTypeId])
+  @@map("registros_clinicos")
+  @@schema("app")
+}
+
+model Vitals {
+  id          BigInt   @id @default(autoincrement())
+  patientId   BigInt   @map("paciente_id")
+  takenById   BigInt   @map("tomado_por_id")
+  systolicBP  Int?     @map("pas_sistolica") @db.SmallInt
+  diastolicBP Int?     @map("pas_diastolica") @db.SmallInt
+  heartRate   Int?     @map("fcritmo") @db.SmallInt
+  tempC       Decimal? @map("temp_c") @db.Decimal(4, 1)
+  spo2        Int?     @map("spo2") @db.SmallInt
+  takenAt     DateTime @default(now()) @map("tomado_en") @db.Timestamptz
+
+  patient User @relation("PatientVitals", fields: [patientId], references: [id], onDelete: Cascade)
+  takenBy User @relation("TakenVitals", fields: [takenById], references: [id])
+
+  @@index([patientId, takenAt(sort: Desc)])
+  @@map("signos_vitales")
+  @@schema("app")
+}
+
+model Attachment {
+  id          BigInt   @id @default(autoincrement())
+  ownerTable  String   @map("propietario_tabla") @db.VarChar(32)
+  ownerId     BigInt   @map("propietario_id")
+  fileName    String   @map("nombre_archivo")
+  mimeType    String   @map("mime") @db.VarChar(100)
+  storagePath String   @unique @map("ruta_storage")
+  sizeBytes   Int?     @map("tamano_bytes")
+  createdById BigInt   @map("creado_por_id")
+  createdAt   DateTime @default(now()) @map("creado_en") @db.Timestamptz
+
+  createdBy User @relation(fields: [createdById], references: [id])
+
+  @@index([ownerTable, ownerId])
+  @@map("adjuntos")
+  @@schema("app")
+}
+
+// ===========================
+// 3) Alertas y atención
+// ===========================
+
+model AlertType {
+  id       BigInt  @id @default(autoincrement())
+  code     String  @unique @map("codigo") @db.VarChar(32)
+  name     String  @map("nombre") @db.VarChar(80)
+  isActive Boolean @default(true) @map("activo")
+  alerts   Alert[]
+
+  @@map("tipos_alerta")
+  @@schema("app")
+}
+
+model Alert {
+  id           BigInt    @id @default(autoincrement())
+  patientId    BigInt?   @map("paciente_id")
+  typeId       BigInt?   @map("tipo_alerta_id")
+  status       String    @default("pendiente") @map("estado") @db.VarChar(20)
+  latitude     Decimal?  @map("latitud") @db.Decimal(9, 6)
+  longitude    Decimal?  @map("longitud") @db.Decimal(9, 6)
+  description  String?   @map("descripcion")
+  createdAt    DateTime  @default(now()) @map("creado_en") @db.Timestamptz
+  assignedToId BigInt?   @map("asignado_a_id")
+  resolvedAt   DateTime? @map("resuelto_en") @db.Timestamptz
+  source       String    @default("app") @map("fuente") @db.VarChar(16)
+
+  patient    User?        @relation("PatientAlerts", fields: [patientId], references: [id])
+  type       AlertType?   @relation(fields: [typeId], references: [id])
+  assignedTo User?        @relation("AssignedAlerts", fields: [assignedToId], references: [id])
+  events     AlertEvent[]
+
+  @@index([status])
+  @@index([latitude, longitude])
+  @@index([assignedToId])
+  @@map("alertas")
+  @@schema("app")
+}
+
+model AlertEvent {
+  id        BigInt   @id @default(autoincrement())
+  alertId   BigInt   @map("alerta_id")
+  userId    BigInt?  @map("por_usuario_id")
+  type      String   @map("tipo") @db.VarChar(32)
+  details   Json     @default("{}") @map("detalle_json")
+  createdAt DateTime @default(now()) @map("creado_en") @db.Timestamptz
+
+  alert Alert @relation(fields: [alertId], references: [id], onDelete: Cascade)
+  user  User? @relation(fields: [userId], references: [id])
+
+  @@index([alertId])
+  @@index([type])
+  @@map("eventos_alerta")
+  @@schema("app")
+}
+
+// ===========================
+// 4) Citas y agenda
+// ===========================
+
+model ServiceType {
+  id           BigInt        @id @default(autoincrement())
+  code         String        @unique @map("codigo") @db.VarChar(32)
+  name         String        @map("nombre") @db.VarChar(80)
+  isActive     Boolean       @default(true) @map("activo")
+  appointments Appointment[]
+
+  @@map("tipos_servicio")
+  @@schema("app")
+}
+
+model Schedule {
+  id        BigInt   @id @default(autoincrement())
+  nurseId   BigInt   @map("enfermero_id")
+  dayOfWeek Int      @map("dia_semana") @db.SmallInt
+  startTime DateTime @map("hora_inicio") @db.Time
+  endTime   DateTime @map("hora_fin") @db.Time
+
+  nurse User @relation(fields: [nurseId], references: [id])
+
+  @@index([nurseId, dayOfWeek])
+  @@map("agendas")
+  @@schema("app")
+}
+
+model Appointment {
+  id            BigInt   @id @default(autoincrement())
+  patientId     BigInt   @map("paciente_id")
+  nurseId       BigInt   @map("enfermero_id")
+  serviceTypeId BigInt   @map("tipo_servicio_id")
+  start         DateTime @map("inicio") @db.Timestamptz
+  end           DateTime @map("fin") @db.Timestamptz
+  status        String   @default("solicitada") @map("estado") @db.VarChar(20)
+  reason        String?  @map("motivo")
+  createdAt     DateTime @default(now()) @map("creado_en") @db.Timestamptz
+
+  patient     User        @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
+  nurse       User        @relation("NurseAppointments", fields: [nurseId], references: [id])
+  serviceType ServiceType @relation(fields: [serviceTypeId], references: [id])
+
+  @@index([nurseId, start, end])
+  @@index([patientId, start])
+  @@map("citas")
+  @@schema("app")
+}
+
+// ===========================
+// 5) Auditoría y configuración
+// ===========================
+
+model Audit {
+  id        BigInt   @id @default(autoincrement())
+  actorId   BigInt?  @map("actor_id")
+  action    String   @map("accion") @db.VarChar(16)
+  entity    String   @map("entidad") @db.VarChar(64)
+  entityId  BigInt?  @map("entidad_id")
+  metadata  Json     @default("{}") @map("metadata")
+  ip        String?  @db.Inet
+  createdAt DateTime @default(now()) @map("creado_en") @db.Timestamptz
+
+  @@map("auditoria")
+  @@schema("app")
+}
+
+model Parameter {
+  key       String   @id @map("clave") @db.VarChar(64)
+  value     Json     @map("valor_json")
+  updatedAt DateTime @default(now()) @map("actualizado_en") @db.Timestamptz
+
+  @@map("parametros")
+  @@schema("app")
 }
