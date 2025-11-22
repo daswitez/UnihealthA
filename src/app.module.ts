@@ -7,6 +7,9 @@ import { QueueModule } from './queue/queue.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { PatientsModule } from './patients/patients.module';
+import { ClinicalRecordsModule } from './clinical-records/clinical-records.module';
+import { VitalsModule } from './vitals/vitals.module';
+import { AttachmentsModule } from './attachments/attachments.module';
 
 @Module({
   imports: [
@@ -19,6 +22,9 @@ import { PatientsModule } from './patients/patients.module';
     UsersModule,
     AuthModule,
     PatientsModule,
+    ClinicalRecordsModule,
+    VitalsModule,
+    AttachmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
