@@ -1,3 +1,8 @@
+// Carga explícitamente las variables de entorno desde .env
+// para que Prisma use el mismo DATABASE_URL que la app NestJS.
+const dotenv = require('dotenv');
+dotenv.config();
+
 const { PrismaClient } = require('@prisma/client');
 
 async function testConnection() {

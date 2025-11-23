@@ -102,13 +102,14 @@ backend/
 
 ## 🔧 Configuración
 
-Las variables de entorno se encuentran en el archivo `.env`:
+Las variables de entorno se encuentran en el archivo `.env`.  
+Para que todo funcione correctamente con Docker y el esquema `app` de PostgreSQL, la configuración recomendada es:
 
 ```env
-# Database
-DATABASE_URL="postgresql://admin:admin123@localhost:5432/nestjs_db?schema=public"
+# Database (Docker postgres_db → schema app)
+DATABASE_URL="postgresql://admin:admin123@localhost:5432/nestjs_db?schema=app"
 
-# Redis
+# Redis (Docker redis_cache)
 REDIS_HOST=localhost
 REDIS_PORT=6379
 
@@ -117,28 +118,50 @@ PORT=3000
 NODE_ENV=development
 ```
 
+> Nota: `admin`, `admin123` y `nestjs_db` deben coincidir exactamente con los valores definidos en `docker-compose.yml`.
+
 ## 🗃️ Prisma
 
-### Modelo de ejemplo (User)
+Este proyecto usa Prisma ORM contra un esquema PostgreSQL llamado `app`.  
+En `prisma/schema.prisma` los modelos están mapeados a ese esquema mediante `@@schema("app")` y el datasource incluye:
 
-El proyecto incluye un modelo de ejemplo `User` en `prisma/schema.prisma`:
+- `previewFeatures = ["multiSchema"]`
+- `schemas = ["app"]`
 
-```prisma
-model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-```
+### Flujo recomendado de trabajo con Prisma y Docker
 
-### Modificar el esquema
+1. Asegúrate de tener el `.env` configurado como se indica en la sección de **Configuración** (`schema=app`).
+2. Levanta los servicios de base de datos con Docker:
 
-1. Edita `prisma/schema.prisma`
-2. Ejecuta `npm run prisma:migrate` para crear y aplicar la migración
-3. El cliente de Prisma se regenera automáticamente
+   ```bash
+   npm run docker:up
+   ```
 
+3. Crea el esquema `app` y todas las tablas ejecutando el script SQL dentro del contenedor de PostgreSQL:
+
+   ```bash
+   docker exec -i postgres_db psql -U admin -d nestjs_db < full-schema.sql
+   ```
+
+4. Inserta los datos iniciales (roles, tipos, etc.) con:
+
+   ```bash
+   docker exec -i postgres_db psql -U admin -d nestjs_db < manual-seed.sql
+   ```
+
+5. Genera el cliente de Prisma:
+
+   ```bash
+   npm run prisma:generate
+   ```
+
+6. (Opcional) Abre Prisma Studio para inspeccionar y editar datos:
+
+   ```bash
+   npm run prisma:studio
+   ```
+
+> Importante: mientras el esquema se gestione principalmente mediante los archivos SQL (`full-schema.sql` y `manual-seed.sql`), se recomienda **no usar** `npm run prisma:migrate` para cambios de estructura, sino actualizar primero el SQL y luego el `schema.prisma` de forma coherente.
 ## 🐳 Docker
 
 Los servicios de PostgreSQL y Redis están configurados en `docker-compose.yml`:

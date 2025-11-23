@@ -27,6 +27,26 @@ services:
     networks:
       - app-network
 
+  api:
+    build: .
+    container_name: nest_api
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    environment:
+      # Dentro de la red docker el host de Postgres es el nombre del servicio: postgres
+      DATABASE_URL: postgresql://admin:admin123@postgres:5432/nestjs_db?schema=app
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      JWT_SECRET: secretKey
+      NODE_ENV: production
+      PORT: 3000
+    ports:
+      - '3000:3000'
+    networks:
+      - app-network
+
 volumes:
   postgres_data:
   redis_data:
