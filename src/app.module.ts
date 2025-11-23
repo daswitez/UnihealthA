@@ -21,8 +21,27 @@ import { AuditInterceptor } from './audit/audit.interceptor';
 
 @Module({
   imports: [
+    // Configuración global de variables de entorno
     ConfigModule.forRoot({ isGlobal: true }),
-    LoggerModule.forRoot(),
+    // Logger estructurado con nestjs-pino (JSON en prod, pretty solo en desarrollo)
+    LoggerModule.forRoot({
+      pinoHttp: {
+        level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
+        // En tests y producción evitamos dependencias extra como pino-pretty
+        transport:
+          process.env.NODE_ENV === 'development'
+            ? {
+                target: 'pino-pretty',
+                options: {
+                  colorize: true,
+                  translateTime: 'SYS:standard',
+                  singleLine: false,
+                },
+              }
+            : undefined,
+        autoLogging: true,
+      },
+    }),
     BullBoardModule.forRoot({
       route: '/admin/queues',
       adapter: ExpressAdapter,

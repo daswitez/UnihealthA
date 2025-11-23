@@ -41,6 +41,26 @@ Backend API construido con NestJS, Prisma, BullMQ, PostgreSQL y Redis.
 
 ## 🏃 Ejecutar la aplicación
 
+### Modo Docker (recomendado: API + PostgreSQL + Redis)
+
+```bash
+# Levantar todo (build + up en segundo plano)
+npm run docker:up
+
+# Parar todos los contenedores
+npm run docker:down
+```
+
+Con esto se levantan tres servicios en Docker:
+
+- `postgres_db` (PostgreSQL)
+- `redis_cache` (Redis)
+- `nest_api` (API NestJS + Prisma)
+
+La API quedará disponible en `http://localhost:3000`.
+
+### Modo local (solo si no usas Docker para la API)
+
 ```bash
 # Desarrollo
 npm run start:dev
@@ -49,8 +69,6 @@ npm run start:dev
 npm run build
 npm run start:prod
 ```
-
-La aplicación estará disponible en `http://localhost:3000`
 
 ## 📝 Scripts Disponibles
 
@@ -68,14 +86,14 @@ La aplicación estará disponible en `http://localhost:3000`
 - `npm run prisma:studio` - Abre Prisma Studio (GUI para la base de datos)
 
 ### Docker
-- `npm run docker:up` - Levanta los contenedores de PostgreSQL y Redis
+- `npm run docker:up` - Construye la imagen de la API y levanta los contenedores de PostgreSQL, Redis y NestJS
 - `npm run docker:down` - Detiene los contenedores
 
 ### Testing
 - `npm run test` - Ejecuta los tests unitarios
 - `npm run test:watch` - Ejecuta los tests en modo watch
-- `npm run test:cov` - Ejecuta los tests con coverage
-- `npm run test:e2e` - Ejecuta los tests end-to-end
+- `npm run test:cov` - Ejecuta los tests con coverage (objetivo mínimo global 80%)
+- `npm run test:e2e` - Ejecuta los tests end-to-end (requiere base de datos accesible desde Jest)
 
 ### Linting
 - `npm run lint` - Ejecuta ESLint
@@ -164,12 +182,19 @@ En `prisma/schema.prisma` los modelos están mapeados a ese esquema mediante `@@
 > Importante: mientras el esquema se gestione principalmente mediante los archivos SQL (`full-schema.sql` y `manual-seed.sql`), se recomienda **no usar** `npm run prisma:migrate` para cambios de estructura, sino actualizar primero el SQL y luego el `schema.prisma` de forma coherente.
 ## 🐳 Docker
 
-Los servicios de PostgreSQL y Redis están configurados en `docker-compose.yml`:
+Los servicios de PostgreSQL, Redis y la API NestJS están configurados en `docker-compose.yml`:
 
 - **PostgreSQL**: Puerto 5432
 - **Redis**: Puerto 6379
+- **API NestJS**: Puerto 3000 (`nest_api`)
 
-Ambos servicios tienen volúmenes persistentes para no perder datos.
+Todos los servicios usan volúmenes persistentes para no perder datos durante reinicios.
+
+La UI de colas de Bull Board está disponible en:
+
+- `http://localhost:3000/admin/queues`
+
+> Nota: asegúrate de tener los contenedores levantados con `npm run docker:up` antes de ejecutar pruebas de integración o e2e.
 
 ## 📊 BullMQ
 
