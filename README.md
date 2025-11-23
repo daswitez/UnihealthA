@@ -118,6 +118,11 @@ backend/
 └── package.json
 ```
 
+Documentación funcional detallada por módulo en la carpeta `docs/`:
+
+- `docs/README.md` – visión general, autenticación, convenciones.
+- `docs/*.md` – un archivo por dominio (auth, users, patients, alerts, appointments, etc.) con ejemplos de consumo desde frontend.
+
 ## 🔧 Configuración
 
 Las variables de entorno se encuentran en el archivo `.env`.  
