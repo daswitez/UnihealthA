@@ -10,6 +10,9 @@ import { PatientsModule } from './patients/patients.module';
 import { ClinicalRecordsModule } from './clinical-records/clinical-records.module';
 import { VitalsModule } from './vitals/vitals.module';
 import { AttachmentsModule } from './attachments/attachments.module';
+import { AlertsModule } from './alerts/alerts.module';
+import { AppointmentsModule } from './appointments/appointments.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 @Module({
   imports: [
@@ -25,6 +28,9 @@ import { AttachmentsModule } from './attachments/attachments.module';
     ClinicalRecordsModule,
     VitalsModule,
     AttachmentsModule,
+    AlertsModule,
+    AppointmentsModule,
+    NotificationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
