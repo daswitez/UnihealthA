@@ -56,6 +56,8 @@ model User {
   patientAppointments Appointment[] @relation("PatientAppointments")
   nurseAppointments   Appointment[] @relation("NurseAppointments")
 
+  auditLogs AuditLog[]
+
   @@index([roleId])
   @@map("usuarios")
   @@schema("app")
@@ -275,25 +277,30 @@ model Appointment {
 // 5) Auditoría y configuración
 // ===========================
 
-model Audit {
-  id        BigInt   @id @default(autoincrement())
-  actorId   BigInt?  @map("actor_id")
-  action    String   @map("accion") @db.VarChar(16)
-  entity    String   @map("entidad") @db.VarChar(64)
-  entityId  BigInt?  @map("entidad_id")
-  metadata  Json     @default("{}") @map("metadata")
-  ip        String?  @db.Inet
-  createdAt DateTime @default(now()) @map("creado_en") @db.Timestamptz
+model AuditLog {
+  id         BigInt   @id @default(autoincrement())
+  userId     BigInt?  @map("usuario_id")
+  user       User?    @relation(fields: [userId], references: [id])
+  action     String   @map("accion") @db.VarChar(32)
+  resource   String   @map("recurso") @db.VarChar(64)
+  resourceId String?  @map("recurso_id") // Stored as string to support BigInt or UUID
+  details    Json?    @map("detalles")
+  ip         String?  @db.Inet
+  createdAt  DateTime @default(now()) @map("creado_en") @db.Timestamptz
 
-  @@map("auditoria")
+  @@index([userId])
+  @@index([resource])
+  @@map("audit_logs")
   @@schema("app")
 }
 
-model Parameter {
-  key       String   @id @map("clave") @db.VarChar(64)
-  value     Json     @map("valor_json")
-  updatedAt DateTime @default(now()) @map("actualizado_en") @db.Timestamptz
+model SystemParameter {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique @map("clave") @db.VarChar(64)
+  value       String   @map("valor") // Storing as string for simplicity, can be JSON stringified
+  description String?  @map("descripcion")
+  updatedAt   DateTime @updatedAt @map("actualizado_en") @db.Timestamptz
 
-  @@map("parametros")
+  @@map("system_parameters")
   @@schema("app")
 }
