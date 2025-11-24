@@ -1,0 +1,78 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      # Misma URL que usas en local, pero apuntando al servicio de postgres del job
+      DATABASE_URL: postgresql://admin:admin123@localhost:5432/nestjs_db?schema=app
+      JWT_SECRET: secretKey
+      NODE_ENV: test
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin123
+          POSTGRES_DB: nestjs_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U admin -d nestjs_db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npm run prisma:generate
+
+      - name: Wait for Postgres
+        run: |
+          for i in {1..20}; do
+            if pg_isready -h localhost -p 5432 -U admin; then
+              echo "Postgres is ready"
+              break
+            fi
+            echo "Waiting for Postgres..."
+            sleep 3
+          done
+
+      - name: Apply schema (full-schema.sql)
+        run: |
+          psql "postgresql://admin:admin123@localhost:5432/nestjs_db" -f full-schema.sql
+
+      - name: Seed initial data (manual-seed.sql)
+        run: |
+          psql "postgresql://admin:admin123@localhost:5432/nestjs_db" -f manual-seed.sql
+
+      - name: Run unit tests
+        run: npm test
+
+      - name: Run coverage (enforce thresholds)
+        run: npm run test:cov
+
+      - name: Run e2e tests
+        run: npm run test:e2e
+
+
