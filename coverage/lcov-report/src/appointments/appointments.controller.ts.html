@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/17</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/12</span>
+                <span class='fraction'>9/12</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/5</span>
+                <span class='fraction'>5/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/15</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -94,66 +94,66 @@
 <a name='L29'></a><a href='#L29'>29</a>
 <a name='L30'></a><a href='#L30'>30</a>
 <a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<a name='L32'></a><a href='#L32'>32</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';</span>
-<span class="cstat-no" title="statement not covered" >import { AppointmentsService } from './appointments.service';</span>
-<span class="cstat-no" title="statement not covered" >import { CreateAppointmentDto } from './dto/create-appointment.dto';</span>
-<span class="cstat-no" title="statement not covered" >import { UpdateAppointmentDto } from './dto/update-appointment.dto';</span>
-<span class="cstat-no" title="statement not covered" >import { AuthGuard } from '@nestjs/passport';</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { AppointmentsService } from './appointments.service';
+import { CreateAppointmentDto } from './dto/create-appointment.dto';
+import { UpdateAppointmentDto } from './dto/update-appointment.dto';
+import { AuthGuard } from '@nestjs/passport';
 &nbsp;
 @UseGuards(AuthGuard('jwt'))
 @Controller('appointments')
-export <span class="cstat-no" title="statement not covered" >class <span class="cstat-no" title="statement not covered" ><span class="cstat-no" title="statement not covered" >AppointmentsController </span>{</span></span>
-<span class="fstat-no" title="function not covered" >  constructor(private readonly <span class="cstat-no" title="statement not covered" >a</span>ppointmentsService: A</span>ppointmentsService) {}
+export class AppointmentsController {
+  constructor(private readonly appointmentsService: AppointmentsService<span class="branch-1 cbranch-no" title="branch not covered" >) {}</span>
 &nbsp;
   @Post()
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  create(</span>@Body() createAppointmentDto: CreateAppointmentDto) {</span>
-<span class="cstat-no" title="statement not covered" >    return this.appointmentsService.create(createAppointmentDto);</span>
+  create(@Body() createAppointmentDto: CreateAppointmentDto<span class="branch-1 cbranch-no" title="branch not covered" >) {</span>
+    return this.appointmentsService.create(createAppointmentDto);
   }
 &nbsp;
   @Get()
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  findAll(</span>) {</span>
-<span class="cstat-no" title="statement not covered" >    return this.appointmentsService.findAll();</span>
+  findAll() {
+    return this.appointmentsService.findAll();
   }
 &nbsp;
   @Get(':id')
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  findOne(</span>@Param('id') id: string) {</span>
-<span class="cstat-no" title="statement not covered" >    return this.appointmentsService.findOne(+id);</span>
+  findOne(@Param('id') id: string) {
+    return this.appointmentsService.findOne(+id);
   }
 &nbsp;
   @Patch(':id/status')
-<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >  updateStatus(</span>@Param('id') id: string, @Body() updateAppointmentDto: UpdateAppointmentDto) {</span>
-<span class="cstat-no" title="statement not covered" >    return this.appointmentsService.update(+id, updateAppointmentDto);</span>
+  updateStatus(@Param('id') id: string, @Body() updateAppointmentDto: UpdateAppointmentDto<span class="branch-1 cbranch-no" title="branch not covered" >) {</span>
+    return this.appointmentsService.update(+id, updateAppointmentDto);
   }
 }
 &nbsp;</pre></td></tr></table></pre>
@@ -163,7 +163,7 @@ export <span class="cstat-no" title="statement not covered" >class <span class="
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-11-23T22:06:10.263Z
+                at 2025-11-24T00:23:59.811Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
