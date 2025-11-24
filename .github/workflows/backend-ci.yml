@@ -15,6 +15,9 @@ jobs:
       DATABASE_URL: postgresql://admin:admin123@localhost:5432/nestjs_db?schema=app
       JWT_SECRET: secretKey
       NODE_ENV: test
+      # Redis usado por BullMQ en tests/e2e
+      REDIS_HOST: localhost
+      REDIS_PORT: 6379
 
     services:
       postgres:
@@ -27,6 +30,16 @@ jobs:
           - 5432:5432
         options: >-
           --health-cmd="pg_isready -U admin -d nestjs_db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd="redis-cli ping"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
