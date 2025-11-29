@@ -5,13 +5,14 @@ import { PrismaService } from '../prisma/prisma.service';
 export class AttachmentsService {
   constructor(private prisma: PrismaService) {}
 
-  create(file: Express.Multer.File, ownerTable: string, ownerId: number, createdByUserId: number) {
+  create(file: Express.Multer.File, ownerTable: string, ownerId: number, createdByUserId: number, category?: string) {
     return this.prisma.attachment.create({
       data: {
         ownerTable,
-        ownerId,
+        ownerId: BigInt(ownerId),
         fileName: file.originalname,
         mimeType: file.mimetype,
+        category,
         storagePath: file.path,
         sizeBytes: file.size,
         createdById: createdByUserId,

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { QueueModule } from './queue/queue.module';
 import { UsersModule } from './users/users.module';
@@ -13,6 +13,8 @@ import { AppointmentsModule } from './appointments/appointments.module';
 import { NotificationsModule } from './notifications/notifications.module';
 import { AuditModule } from './audit/audit.module';
 import { ParametersModule } from './parameters/parameters.module';
+import { AccessModule } from './access/access.module';
+import { MedicalHistoryModule } from './medical-history/medical-history.module';
 import { LoggerModule } from 'nestjs-pino';
 import { BullBoardModule } from '@bull-board/nestjs';
 import { ExpressAdapter } from '@bull-board/express';
@@ -21,15 +23,11 @@ import { AuditInterceptor } from './audit/audit.interceptor';
 
 @Module({
   imports: [
-    // Configuración global de variables de entorno
     ConfigModule.forRoot({ isGlobal: true }),
-    // Logger estructurado con nestjs-pino (JSON en prod, pretty solo en desarrollo)
     LoggerModule.forRoot({
       pinoHttp: {
         level: process.env.NODE_ENV === 'production' ? 'info' : 'debug',
-        // En tests y producción evitamos dependencias extra como pino-pretty
-        transport:
-          process.env.NODE_ENV === 'development'
+        transport: process.env.NODE_ENV === 'development'
             ? {
                 target: 'pino-pretty',
                 options: {
@@ -59,6 +57,8 @@ import { AuditInterceptor } from './audit/audit.interceptor';
     NotificationsModule,
     AuditModule,
     ParametersModule,
+    AccessModule,
+    MedicalHistoryModule,
   ],
   controllers: [],
   providers: [

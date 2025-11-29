@@ -51,8 +51,7 @@ async function testPatients() {
     firstName: 'John',
     lastName: 'Doe',
     dob: '1990-01-01T00:00:00Z',
-    gender: 'Male',
-    phone: '555-1234'
+    gender: 'M'
   };
 
   const createRes = await request(

@@ -116,6 +116,7 @@ Cada módulo tiene su propio archivo en `docs/` con detalles de endpoints y ejem
 - `docs/patients.md` – CRUD de pacientes.
 - `docs/clinical-records.md` – Historia clínica.
 - `docs/vitals.md` – Signos vitales.
+- `docs/medical-history.md` – **Historias médicas completas (35+ endpoints)** con control de acceso granular.
 - `docs/alerts.md` – Alertas y asignación a enfermeros.
 - `docs/appointments.md` – Citas y agenda.
 - `docs/attachments.md` – Subida y descarga de adjuntos.

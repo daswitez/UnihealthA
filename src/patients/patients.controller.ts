@@ -29,6 +29,11 @@ export class PatientsController {
     return this.patientsService.update(+id, updatePatientDto);
   }
 
+  @Patch(':id/lifestyle')
+  updateLifestyle(@Param('id') id: string, @Body() body: { isSmoker?: boolean; alcohol?: string; activity?: string }) {
+    return this.patientsService.updateLifestyle(+id, body);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.patientsService.remove(+id);

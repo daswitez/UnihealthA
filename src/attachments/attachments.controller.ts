@@ -22,8 +22,8 @@ export class AttachmentsController {
       },
     }),
   }))
-  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() body: { ownerTable: string; ownerId: string }, @Request() req) {
-    return this.attachmentsService.create(file, body.ownerTable, +body.ownerId, req.user.userId);
+  uploadFile(@UploadedFile() file: Express.Multer.File, @Body() body: { ownerTable: string; ownerId: string; category?: string }, @Request() req) {
+    return this.attachmentsService.create(file, body.ownerTable, +body.ownerId, req.user.userId, body.category);
   }
 
   @Get(':id')

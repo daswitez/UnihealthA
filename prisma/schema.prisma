@@ -27,6 +27,7 @@ model User {
   id           BigInt    @id @default(autoincrement())
   email        String    @unique @db.VarChar(254)
   passwordHash String    @map("pass_hash")
+  pinHash      String?   @map("pin_hash") @db.VarChar(60)
   roleId       BigInt    @map("rol_id")
   isActive     Boolean   @default(true) @map("activo")
   createdAt    DateTime  @default(now()) @map("creado_en") @db.Timestamptz
@@ -36,6 +37,15 @@ model User {
   role           Role            @relation(fields: [roleId], references: [id])
   consent        Consent[]
   patientProfile PatientProfile?
+  medicalHistory MedicalHistory[]
+  allergies      Allergy[]
+  medications    Medication[]
+  familyHistory  FamilyHistory[]
+  lifestyleDetail LifestyleDetail[]
+  
+  // Accesos
+  grantedAccesses  MedicalAccess[] @relation("PatientAccess")
+  receivedAccesses MedicalAccess[] @relation("DoctorAccess")
 
   // Relaciones clínicas
   createdRecords ClinicalRecord[] @relation("CreatedRecords")
@@ -87,7 +97,14 @@ model PatientProfile {
   lastName         String    @map("apellidos") @db.VarChar(100)
   dob              DateTime? @map("fecha_nacimiento") @db.Date
   gender           String?   @map("sexo") @db.Char(1)
+  bloodGroup       String?   @map("grupo_sanguineo") @db.VarChar(5)
+  heightCm         Int?      @map("altura_cm") @db.SmallInt
+  weightKg         Decimal?  @map("peso_kg") @db.Decimal(5, 2)
+  insurance        Json?     @default("{}") @map("seguro_medico")
   emergencyContact String?   @map("contacto_emergencia") @db.VarChar(100)
+  isSmoker         Boolean?  @default(false) @map("es_fumador")
+  alcohol          String?   @map("consumo_alcohol") @db.VarChar(50)
+  activity         String?   @map("actividad_fisica") @db.VarChar(50)
   allergies        String?   @map("alergias")
   history          String?   @map("antecedentes")
   createdAt        DateTime  @default(now()) @map("creado_en") @db.Timestamptz
@@ -96,6 +113,118 @@ model PatientProfile {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("perfiles_paciente")
+  @@schema("app")
+}
+
+model MedicalAccess {
+  id        BigInt    @id @default(autoincrement())
+  patientId BigInt    @map("paciente_id")
+  staffId   BigInt    @map("personal_id")
+  permissions Json    @default("{}") @map("permisos")
+  grantedAt DateTime  @default(now()) @map("otorgado_en") @db.Timestamptz
+  expiresAt DateTime? @map("expira_en") @db.Timestamptz
+  isActive  Boolean   @default(true) @map("activo")
+
+  patient User @relation("PatientAccess", fields: [patientId], references: [id], onDelete: Cascade)
+  staff   User @relation("DoctorAccess", fields: [staffId], references: [id], onDelete: Cascade)
+
+  @@index([patientId])
+  @@index([staffId])
+  @@map("accesos_medicos")
+  @@schema("app")
+}
+
+model MedicalHistory {
+  id          BigInt    @id @default(autoincrement())
+  patientId   BigInt    @map("paciente_id")
+  condition   String    @map("condicion") @db.VarChar(255)
+  diagnosis   String?   @map("diagnostico")
+  treatment   String?   @map("tratamiento")
+  diagnosedAt DateTime? @map("fecha_diagnostico") @db.Date
+  type        String    @map("tipo") @db.VarChar(20) // 'fisico', 'mental'
+  isActive    Boolean   @default(true) @map("activo")
+  notes       String?   @map("notas")
+  createdAt   DateTime  @default(now()) @map("creado_en") @db.Timestamptz
+  updatedAt   DateTime  @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz
+
+  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId])
+  @@index([patientId, type])
+  @@index([patientId, createdAt])
+  @@index([patientId, isActive])
+  @@map("historial_medico")
+  @@schema("app")
+}
+
+model Allergy {
+  id        BigInt   @id @default(autoincrement())
+  patientId BigInt   @map("paciente_id")
+  allergen  String   @map("alergeno") @db.VarChar(255)
+  reaction  String?  @map("reaccion")
+  severity  String?  @map("severidad") @db.VarChar(50)
+  notes     String?  @map("notas")
+  createdAt DateTime @default(now()) @map("creado_en") @db.Timestamptz
+
+  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId])
+  @@map("alergias")
+  @@schema("app")
+}
+
+model Medication {
+  id        BigInt    @id @default(autoincrement())
+  patientId BigInt    @map("paciente_id")
+  name      String    @map("nombre") @db.VarChar(255)
+  dosage    String?   @map("dosis") @db.VarChar(100)
+  frequency String?   @map("frecuencia") @db.VarChar(100)
+  startDate DateTime? @map("fecha_inicio") @db.Date
+  endDate   DateTime? @map("fecha_fin") @db.Date
+  isActive  Boolean   @default(true) @map("activo")
+  createdAt DateTime  @default(now()) @map("creado_en") @db.Timestamptz
+
+  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId])
+  @@index([patientId, isActive])
+  @@index([patientId, startDate, endDate])
+  @@map("medicamentos")
+  @@schema("app")
+}
+
+model FamilyHistory {
+  id           BigInt   @id @default(autoincrement())
+  patientId    BigInt   @map("paciente_id")
+  relationship String   @map("parentesco") @db.VarChar(50)
+  condition    String   @map("condicion") @db.VarChar(255)
+  notes        String?  @map("notas")
+  createdAt    DateTime @default(now()) @map("creado_en") @db.Timestamptz
+
+  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId])
+  @@map("antecedentes_familiares")
+  @@schema("app")
+}
+
+model LifestyleDetail {
+  id               BigInt   @id @default(autoincrement())
+  patientId        BigInt   @map("paciente_id")
+  diet             String?  @map("dieta") @db.VarChar(255)
+  sleepHours       Decimal? @map("sueno_horas") @db.Decimal(3, 1)
+  stressLevel      Int?     @map("estres_nivel") @db.SmallInt
+  activityType     String?  @map("actividad_fisica_tipo") @db.VarChar(255)
+  activityFreq     String?  @map("actividad_fisica_frecuencia") @db.VarChar(100)
+  tobacco          String?  @map("consumo_tabaco") @db.VarChar(100)
+  alcohol          String?  @map("consumo_alcohol") @db.VarChar(100)
+  createdAt        DateTime @default(now()) @map("creado_en") @db.Timestamptz
+  updatedAt        DateTime @default(now()) @map("actualizado_en") @db.Timestamptz
+
+  patient User @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([patientId])
+  @@map("estilo_vida_detalle")
   @@schema("app")
 }
 
@@ -154,6 +283,7 @@ model Attachment {
   ownerId     BigInt   @map("propietario_id")
   fileName    String   @map("nombre_archivo")
   mimeType    String   @map("mime") @db.VarChar(100)
+  category    String?  @map("categoria") @db.VarChar(50)
   storagePath String   @unique @map("ruta_storage")
   sizeBytes   Int?     @map("tamano_bytes")
   createdById BigInt   @map("creado_por_id")

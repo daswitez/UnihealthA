@@ -15,6 +15,7 @@ CREATE TABLE "app"."usuarios" (
     "id" BIGSERIAL NOT NULL,
     "email" VARCHAR(254) NOT NULL,
     "pass_hash" TEXT NOT NULL,
+    "pin_hash" VARCHAR(60), -- PIN de 4 digitos hasheado
     "rol_id" BIGINT NOT NULL,
     "activo" BOOLEAN NOT NULL DEFAULT true,
     "creado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -42,7 +43,14 @@ CREATE TABLE "app"."perfiles_paciente" (
     "apellidos" VARCHAR(100) NOT NULL,
     "fecha_nacimiento" DATE,
     "sexo" CHAR(1),
+    "grupo_sanguineo" VARCHAR(5),
+    "altura_cm" SMALLINT,
+    "peso_kg" DECIMAL(5,2),
+    "seguro_medico" JSONB DEFAULT '{}',
     "contacto_emergencia" VARCHAR(100),
+    "es_fumador" BOOLEAN DEFAULT false,
+    "consumo_alcohol" VARCHAR(50),
+    "actividad_fisica" VARCHAR(50),
     "alergias" TEXT,
     "antecedentes" TEXT,
     "creado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -52,13 +60,33 @@ CREATE TABLE "app"."perfiles_paciente" (
 );
 
 -- CreateTable
-CREATE TABLE "app"."tipos_nota" (
+CREATE TABLE "app"."accesos_medicos" (
     "id" BIGSERIAL NOT NULL,
-    "codigo" VARCHAR(32) NOT NULL,
-    "nombre" VARCHAR(80) NOT NULL,
+    "paciente_id" BIGINT NOT NULL,
+    "personal_id" BIGINT NOT NULL,
+    "permisos" JSONB NOT NULL DEFAULT '{}', -- {'fisico': true, 'mental': false}
+    "otorgado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "expira_en" TIMESTAMPTZ,
     "activo" BOOLEAN NOT NULL DEFAULT true,
 
-    CONSTRAINT "tipos_nota_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "accesos_medicos_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "app"."historial_medico" (
+    "id" BIGSERIAL NOT NULL,
+    "paciente_id" BIGINT NOT NULL,
+    "condicion" VARCHAR(255) NOT NULL,
+    "diagnostico" TEXT,
+    "tratamiento" TEXT,
+    "fecha_diagnostico" DATE,
+    "tipo" VARCHAR(20) NOT NULL CHECK (tipo IN ('fisico', 'mental')),
+    "activo" BOOLEAN NOT NULL DEFAULT true,
+    "notas" TEXT,
+    "creado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "actualizado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "historial_medico_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -96,6 +124,7 @@ CREATE TABLE "app"."adjuntos" (
     "propietario_id" BIGINT NOT NULL,
     "nombre_archivo" TEXT NOT NULL,
     "mime" VARCHAR(100) NOT NULL,
+    "categoria" VARCHAR(50), -- 'reporte_medico', 'lab', 'imagen', etc.
     "ruta_storage" TEXT NOT NULL,
     "tamano_bytes" INTEGER,
     "creado_por_id" BIGINT NOT NULL,
@@ -281,6 +310,27 @@ ALTER TABLE "app"."consentimientos" ADD CONSTRAINT "consentimientos_usuario_id_f
 
 -- AddForeignKey
 ALTER TABLE "app"."perfiles_paciente" ADD CONSTRAINT "perfiles_paciente_usuario_id_fkey" FOREIGN KEY ("usuario_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "app"."accesos_medicos" ADD CONSTRAINT "accesos_medicos_paciente_id_fkey" FOREIGN KEY ("paciente_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "app"."accesos_medicos" ADD CONSTRAINT "accesos_medicos_personal_id_fkey" FOREIGN KEY ("personal_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "app"."historial_medico" ADD CONSTRAINT "historial_medico_paciente_id_fkey" FOREIGN KEY ("paciente_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "app"."alergias" ADD CONSTRAINT "alergias_paciente_id_fkey" FOREIGN KEY ("paciente_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "app"."medicamentos" ADD CONSTRAINT "medicamentos_paciente_id_fkey" FOREIGN KEY ("paciente_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "app"."antecedentes_familiares" ADD CONSTRAINT "antecedentes_familiares_paciente_id_fkey" FOREIGN KEY ("paciente_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "app"."estilo_vida_detalle" ADD CONSTRAINT "estilo_vida_detalle_paciente_id_fkey" FOREIGN KEY ("paciente_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "app"."registros_clinicos" ADD CONSTRAINT "registros_clinicos_paciente_id_fkey" FOREIGN KEY ("paciente_id") REFERENCES "app"."usuarios"("id") ON DELETE CASCADE ON UPDATE CASCADE;

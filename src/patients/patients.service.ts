@@ -24,7 +24,7 @@ export class PatientsService {
         data: {
           email,
           passwordHash: password,
-          roleId: role ? role.id : 1,
+          roleId: role ? role.id : 1n,
         },
       });
 
@@ -65,7 +65,7 @@ export class PatientsService {
     const { firstName, lastName, dob, gender, ...rest } = updatePatientDto;
     
     return this.prisma.patientProfile.update({
-      where: { userId: id },
+      where: { userId: BigInt(id) },
       data: {
         firstName,
         lastName,
@@ -75,9 +75,20 @@ export class PatientsService {
     });
   }
 
+  updateLifestyle(id: number, data: { isSmoker?: boolean; alcohol?: string; activity?: string }) {
+    return this.prisma.patientProfile.update({
+      where: { userId: BigInt(id) },
+      data: {
+        isSmoker: data.isSmoker,
+        alcohol: data.alcohol,
+        activity: data.activity,
+      },
+    });
+  }
+
   remove(id: number) {
     return this.prisma.user.delete({
-      where: { id },
+      where: { id: BigInt(id) },
     });
   }
 }
