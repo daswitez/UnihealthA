@@ -115,6 +115,19 @@ describe('MedicalHistoryService', () => {
 
       await expect(service.create(dto, 2)).rejects.toThrow(ForbiddenException);
     });
+
+    it('should create mental health record when staff has mental permission', async () => {
+      const mentalDto = { ...dto, type: 'mental' as 'mental' };
+      const mockResult = { id: BigInt(1), ...mentalDto };
+      (accessServiceMock.checkAccess as jest.Mock).mockResolvedValue({
+        permissions: { fisico: false, mental: true },
+      });
+      (prismaMock.medicalHistory!.create as jest.Mock).mockResolvedValue(mockResult);
+
+      const result = await service.create(mentalDto, 2);
+
+      expect(result).toEqual(mockResult);
+    });
   });
 
   describe('findAllForPatient', () => {
@@ -256,6 +269,25 @@ describe('MedicalHistoryService', () => {
       const result = await service.findAllergies(1, 1);
 
       expect(result).toEqual(mockAllergies);
+    });
+  });
+
+  describe('findOneAllergy', () => {
+    it('should return one allergy', async () => {
+      const mockAllergy = { id: BigInt(1), patientId: BigInt(1), allergen: 'Peanuts' };
+
+      (prismaMock.allergy!.findUnique as jest.Mock).mockResolvedValue(mockAllergy);
+      (accessServiceMock.checkAccess as jest.Mock).mockResolvedValue(null);
+
+      const result = await service.findOneAllergy(1, 1);
+
+      expect(result).toEqual(mockAllergy);
+    });
+
+    it('should throw NotFoundException when allergy not found', async () => {
+      (prismaMock.allergy!.findUnique as jest.Mock).mockResolvedValue(null);
+
+      await expect(service.findOneAllergy(999, 1)).rejects.toThrow(NotFoundException);
     });
   });
 
@@ -415,6 +447,42 @@ describe('MedicalHistoryService', () => {
       const result = await service.findLifestyle(1, 1);
 
       expect(result).toEqual(mockLifestyle);
+    });
+  });
+
+  describe('updateLifestyle', () => {
+    it('should update lifestyle', async () => {
+      const existing = { id: BigInt(1), patientId: BigInt(1), diet: 'Mediterranean' };
+      const updateDto = { sleepHours: 8 };
+      const updated = { ...existing, ...updateDto };
+
+      (prismaMock.lifestyleDetail!.findUnique as jest.Mock).mockResolvedValue(existing);
+      (prismaMock.lifestyleDetail!.update as jest.Mock).mockResolvedValue(updated);
+      (accessServiceMock.checkAccess as jest.Mock).mockResolvedValue(null);
+
+      const result = await service.updateLifestyle(1, updateDto as any, 1);
+
+      expect(result).toEqual(updated);
+    });
+
+    it('should throw NotFoundException when lifestyle not found', async () => {
+      (prismaMock.lifestyleDetail!.findUnique as jest.Mock).mockResolvedValue(null);
+
+      await expect(service.updateLifestyle(999, {} as any, 1)).rejects.toThrow(NotFoundException);
+    });
+  });
+
+  describe('removeLifestyle', () => {
+    it('should delete lifestyle', async () => {
+      const existing = { id: BigInt(1), patientId: BigInt(1) };
+
+      (prismaMock.lifestyleDetail!.findUnique as jest.Mock).mockResolvedValue(existing);
+      (prismaMock.lifestyleDetail!.delete as jest.Mock).mockResolvedValue(existing);
+      (accessServiceMock.checkAccess as jest.Mock).mockResolvedValue(null);
+
+      await service.removeLifestyle(1, 1);
+
+      expect(prismaMock.lifestyleDetail!.delete).toHaveBeenCalled();
     });
   });
 
