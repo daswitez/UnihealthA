@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1763947863587" clover="3.2.0">
-  <project timestamp="1763947863587" name="All files">
-    <metrics statements="463" coveredstatements="424" conditionals="203" coveredconditionals="144" methods="116" coveredmethods="105" elements="782" coveredelements="673" complexity="0" loc="463" ncloc="463" packages="34" files="69" classes="69"/>
+<coverage generated="1764536930591" clover="3.2.0">
+  <project timestamp="1764536930591" name="All files">
+    <metrics statements="817" coveredstatements="700" conditionals="372" coveredconditionals="237" methods="204" coveredmethods="163" elements="1393" coveredelements="1100" complexity="0" loc="817" ncloc="817" packages="38" files="88" classes="88"/>
     <package name="src">
-      <metrics statements="30" coveredstatements="30" conditionals="8" coveredconditionals="5" methods="3" coveredmethods="3"/>
-      <file name="app.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\app.controller.ts">
+      <metrics statements="32" coveredstatements="32" conditionals="8" coveredconditionals="5" methods="3" coveredmethods="3"/>
+      <file name="app.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\app.controller.ts">
         <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -13,8 +13,8 @@
         <line num="9" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
       </file>
-      <file name="app.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\app.module.ts">
-        <metrics statements="21" coveredstatements="21" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <file name="app.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\app.module.ts">
+        <metrics statements="23" coveredstatements="23" conditionals="4" coveredconditionals="2" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -35,18 +35,70 @@
         <line num="18" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
         <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
         <line num="71" count="1" type="stmt"/>
       </file>
-      <file name="app.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\app.service.ts">
+      <file name="app.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\app.service.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="4" count="1" type="stmt"/>
         <line num="6" count="1" type="stmt"/>
       </file>
     </package>
+    <package name="src.access">
+      <metrics statements="38" coveredstatements="18" conditionals="22" coveredconditionals="6" methods="8" coveredmethods="2"/>
+      <file name="access.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\access\access.controller.ts">
+        <metrics statements="11" coveredstatements="8" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="0" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+      </file>
+      <file name="access.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\access\access.module.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+      <file name="access.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\access\access.service.ts">
+        <metrics statements="22" coveredstatements="5" conditionals="18" coveredconditionals="3" methods="4" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="6" count="3" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="3" falsecount="1"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="12" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="17" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="31" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="66" count="0" type="stmt"/>
+        <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="75" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+      </file>
+    </package>
     <package name="src.alerts">
       <metrics statements="40" coveredstatements="38" conditionals="24" coveredconditionals="17" methods="12" coveredmethods="12"/>
-      <file name="alerts.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\alerts\alerts.controller.ts">
+      <file name="alerts.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\alerts\alerts.controller.ts">
         <metrics statements="17" coveredstatements="17" conditionals="12" coveredconditionals="9" methods="6" coveredmethods="6"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
@@ -66,7 +118,7 @@
         <line num="33" count="3" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
       </file>
-      <file name="alerts.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\alerts\alerts.module.ts">
+      <file name="alerts.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\alerts\alerts.module.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -74,7 +126,7 @@
         <line num="4" count="2" type="stmt"/>
         <line num="15" count="2" type="stmt"/>
       </file>
-      <file name="alerts.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\alerts\alerts.service.ts">
+      <file name="alerts.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\alerts\alerts.service.ts">
         <metrics statements="18" coveredstatements="16" conditionals="12" coveredconditionals="8" methods="6" coveredmethods="6"/>
         <line num="1" count="4" type="stmt"/>
         <line num="4" count="4" type="stmt"/>
@@ -98,7 +150,7 @@
     </package>
     <package name="src.alerts.dto">
       <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-alert.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\alerts\dto\create-alert.dto.ts">
+      <file name="create-alert.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\alerts\dto\create-alert.dto.ts">
         <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
         <line num="3" count="3" type="stmt"/>
@@ -108,7 +160,7 @@
         <line num="16" count="3" type="stmt"/>
         <line num="20" count="3" type="stmt"/>
       </file>
-      <file name="update-alert.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\alerts\dto\update-alert.dto.ts">
+      <file name="update-alert.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\alerts\dto\update-alert.dto.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
@@ -117,14 +169,14 @@
     </package>
     <package name="src.alerts.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="alert.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\alerts\entities\alert.entity.ts">
+      <file name="alert.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\alerts\entities\alert.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.appointments">
       <metrics statements="32" coveredstatements="32" conditionals="18" coveredconditionals="14" methods="10" coveredmethods="10"/>
-      <file name="appointments.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\appointments\appointments.controller.ts">
+      <file name="appointments.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\appointments\appointments.controller.ts">
         <metrics statements="15" coveredstatements="15" conditionals="12" coveredconditionals="9" methods="5" coveredmethods="5"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -142,14 +194,14 @@
         <line num="28" count="2" type="cond" truecount="3" falsecount="1"/>
         <line num="29" count="1" type="stmt"/>
       </file>
-      <file name="appointments.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\appointments\appointments.module.ts">
+      <file name="appointments.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\appointments\appointments.module.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
-      <file name="appointments.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\appointments\appointments.service.ts">
+      <file name="appointments.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\appointments\appointments.service.ts">
         <metrics statements="13" coveredstatements="13" conditionals="6" coveredconditionals="5" methods="5" coveredmethods="5"/>
         <line num="1" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
@@ -168,7 +220,7 @@
     </package>
     <package name="src.appointments.dto">
       <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-appointment.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\appointments\dto\create-appointment.dto.ts">
+      <file name="create-appointment.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\appointments\dto\create-appointment.dto.ts">
         <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -179,7 +231,7 @@
         <line num="17" count="2" type="stmt"/>
         <line num="21" count="2" type="stmt"/>
       </file>
-      <file name="update-appointment.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\appointments\dto\update-appointment.dto.ts">
+      <file name="update-appointment.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\appointments\dto\update-appointment.dto.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -188,14 +240,14 @@
     </package>
     <package name="src.appointments.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="appointment.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\appointments\entities\appointment.entity.ts">
+      <file name="appointment.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\appointments\entities\appointment.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.attachments">
       <metrics statements="31" coveredstatements="29" conditionals="15" coveredconditionals="10" methods="8" coveredmethods="6"/>
-      <file name="attachments.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\attachments\attachments.controller.ts">
+      <file name="attachments.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\attachments\attachments.controller.ts">
         <metrics statements="21" coveredstatements="19" conditionals="11" coveredconditionals="7" methods="5" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -219,30 +271,30 @@
         <line num="36" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
       </file>
-      <file name="attachments.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\attachments\attachments.module.ts">
+      <file name="attachments.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\attachments\attachments.module.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
-      <file name="attachments.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\attachments\attachments.service.ts">
+      <file name="attachments.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\attachments\attachments.service.ts">
         <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
         <line num="6" count="4" type="cond" truecount="3" falsecount="1"/>
         <line num="9" count="1" type="stmt"/>
-        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.attachments.dto">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-attachment.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\attachments\dto\create-attachment.dto.ts">
+      <file name="create-attachment.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\attachments\dto\create-attachment.dto.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
-      <file name="update-attachment.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\attachments\dto\update-attachment.dto.ts">
+      <file name="update-attachment.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\attachments\dto\update-attachment.dto.ts">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -251,14 +303,14 @@
     </package>
     <package name="src.attachments.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="attachment.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\attachments\entities\attachment.entity.ts">
+      <file name="attachment.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\attachments\entities\attachment.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.audit">
       <metrics statements="26" coveredstatements="26" conditionals="20" coveredconditionals="11" methods="5" coveredmethods="5"/>
-      <file name="audit.interceptor.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\audit\audit.interceptor.ts">
+      <file name="audit.interceptor.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\audit\audit.interceptor.ts">
         <metrics statements="16" coveredstatements="16" conditionals="14" coveredconditionals="7" methods="3" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -277,13 +329,13 @@
         <line num="27" count="1" type="cond" truecount="1" falsecount="5"/>
         <line num="29" count="1" type="stmt"/>
       </file>
-      <file name="audit.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\audit\audit.module.ts">
+      <file name="audit.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\audit\audit.module.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="8" count="1" type="stmt"/>
       </file>
-      <file name="audit.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\audit\audit.service.ts">
+      <file name="audit.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\audit\audit.service.ts">
         <metrics statements="7" coveredstatements="7" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
@@ -296,7 +348,7 @@
     </package>
     <package name="src.auth">
       <metrics statements="37" coveredstatements="37" conditionals="22" coveredconditionals="17" methods="8" coveredmethods="8"/>
-      <file name="auth.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\auth\auth.controller.ts">
+      <file name="auth.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\auth\auth.controller.ts">
         <metrics statements="10" coveredstatements="10" conditionals="8" coveredconditionals="6" methods="3" coveredmethods="3"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -309,7 +361,7 @@
         <line num="17" count="2" type="cond" truecount="3" falsecount="1"/>
         <line num="18" count="1" type="stmt"/>
       </file>
-      <file name="auth.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\auth\auth.module.ts">
+      <file name="auth.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\auth\auth.module.ts">
         <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -323,7 +375,7 @@
         <line num="17" count="1" type="stmt"/>
         <line num="28" count="1" type="stmt"/>
       </file>
-      <file name="auth.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\auth\auth.service.ts">
+      <file name="auth.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\auth\auth.service.ts">
         <metrics statements="16" coveredstatements="16" conditionals="12" coveredconditionals="10" methods="4" coveredmethods="4"/>
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
@@ -345,7 +397,7 @@
     </package>
     <package name="src.auth.strategies">
       <metrics statements="18" coveredstatements="18" conditionals="12" coveredconditionals="9" methods="4" coveredmethods="4"/>
-      <file name="jwt.strategy.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\auth\strategies\jwt.strategy.ts">
+      <file name="jwt.strategy.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\auth\strategies\jwt.strategy.ts">
         <metrics statements="7" coveredstatements="7" conditionals="6" coveredconditionals="4" methods="2" coveredmethods="2"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -355,7 +407,7 @@
         <line num="9" count="3" type="stmt"/>
         <line num="17" count="1" type="stmt"/>
       </file>
-      <file name="local.strategy.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\auth\strategies\local.strategy.ts">
+      <file name="local.strategy.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\auth\strategies\local.strategy.ts">
         <metrics statements="11" coveredstatements="11" conditionals="6" coveredconditionals="5" methods="2" coveredmethods="2"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -372,7 +424,7 @@
     </package>
     <package name="src.clinical-records">
       <metrics statements="25" coveredstatements="25" conditionals="12" coveredconditionals="9" methods="9" coveredmethods="9"/>
-      <file name="clinical-records.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\clinical-records\clinical-records.controller.ts">
+      <file name="clinical-records.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\clinical-records\clinical-records.controller.ts">
         <metrics statements="14" coveredstatements="14" conditionals="8" coveredconditionals="6" methods="5" coveredmethods="5"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -389,14 +441,14 @@
         <line num="28" count="2" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
       </file>
-      <file name="clinical-records.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\clinical-records\clinical-records.module.ts">
+      <file name="clinical-records.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\clinical-records\clinical-records.module.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
-      <file name="clinical-records.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\clinical-records\clinical-records.service.ts">
+      <file name="clinical-records.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\clinical-records\clinical-records.service.ts">
         <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="1" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
@@ -409,11 +461,11 @@
     </package>
     <package name="src.clinical-records.dto">
       <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-clinical-record.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\clinical-records\dto\create-clinical-record.dto.ts">
+      <file name="create-clinical-record.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\clinical-records\dto\create-clinical-record.dto.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
       </file>
-      <file name="update-clinical-record.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\clinical-records\dto\update-clinical-record.dto.ts">
+      <file name="update-clinical-record.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\clinical-records\dto\update-clinical-record.dto.ts">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -422,14 +474,375 @@
     </package>
     <package name="src.clinical-records.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="clinical-record.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\clinical-records\entities\clinical-record.entity.ts">
+      <file name="clinical-record.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\clinical-records\entities\clinical-record.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
+    <package name="src.medical-history">
+      <metrics statements="215" coveredstatements="165" conditionals="145" coveredconditionals="86" methods="60" coveredmethods="43"/>
+      <file name="medical-history.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\medical-history.controller.ts">
+        <metrics statements="62" coveredstatements="53" conditionals="48" coveredconditionals="36" methods="29" coveredmethods="20"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="35" count="21" type="cond" truecount="3" falsecount="1"/>
+        <line num="43" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="61" count="2" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="73" count="1" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="82" count="1" type="stmt"/>
+        <line num="86" count="2" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="92" count="1" type="stmt"/>
+        <line num="100" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="101" count="1" type="stmt"/>
+        <line num="105" count="2" type="stmt"/>
+        <line num="109" count="1" type="stmt"/>
+        <line num="116" count="2" type="stmt"/>
+        <line num="117" count="0" type="stmt"/>
+        <line num="121" count="2" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+        <line num="130" count="2" type="stmt"/>
+        <line num="131" count="1" type="stmt"/>
+        <line num="139" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="140" count="1" type="stmt"/>
+        <line num="144" count="2" type="stmt"/>
+        <line num="148" count="1" type="stmt"/>
+        <line num="156" count="2" type="stmt"/>
+        <line num="160" count="1" type="stmt"/>
+        <line num="168" count="2" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="173" count="2" type="stmt"/>
+        <line num="178" count="0" type="stmt"/>
+        <line num="186" count="2" type="stmt"/>
+        <line num="187" count="1" type="stmt"/>
+        <line num="194" count="2" type="stmt"/>
+        <line num="195" count="0" type="stmt"/>
+        <line num="203" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="204" count="1" type="stmt"/>
+        <line num="208" count="2" type="stmt"/>
+        <line num="212" count="1" type="stmt"/>
+        <line num="219" count="2" type="stmt"/>
+        <line num="223" count="0" type="stmt"/>
+        <line num="230" count="2" type="stmt"/>
+        <line num="235" count="0" type="stmt"/>
+        <line num="243" count="2" type="stmt"/>
+        <line num="244" count="0" type="stmt"/>
+        <line num="255" count="2" type="cond" truecount="3" falsecount="1"/>
+        <line num="256" count="1" type="stmt"/>
+        <line num="260" count="2" type="stmt"/>
+        <line num="264" count="1" type="stmt"/>
+        <line num="271" count="2" type="stmt"/>
+        <line num="276" count="0" type="stmt"/>
+        <line num="284" count="2" type="stmt"/>
+        <line num="285" count="0" type="stmt"/>
+      </file>
+      <file name="medical-history.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\medical-history.module.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+      <file name="medical-history.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\medical-history.service.ts">
+        <metrics statements="147" coveredstatements="106" conditionals="97" coveredconditionals="50" methods="31" coveredmethods="23"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="3" type="stmt"/>
+        <line num="23" count="3" type="stmt"/>
+        <line num="32" count="3" type="stmt"/>
+        <line num="33" count="27" type="stmt"/>
+        <line num="36" count="27" type="cond" truecount="6" falsecount="2"/>
+        <line num="37" count="27" type="stmt"/>
+        <line num="53" count="23" type="cond" truecount="2" falsecount="0"/>
+        <line num="54" count="19" type="stmt"/>
+        <line num="58" count="4" type="stmt"/>
+        <line num="62" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="64" count="0" type="stmt"/>
+        <line num="68" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="69" count="0" type="stmt"/>
+        <line num="72" count="4" type="stmt"/>
+        <line num="83" count="7" type="stmt"/>
+        <line num="86" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="89" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="90" count="1" type="stmt"/>
+        <line num="103" count="12" type="stmt"/>
+        <line num="114" count="3" type="stmt"/>
+        <line num="117" count="3" type="stmt"/>
+        <line num="119" count="2" type="stmt"/>
+        <line num="131" count="2" type="stmt"/>
+        <line num="132" count="2" type="stmt"/>
+        <line num="140" count="2" type="stmt"/>
+        <line num="143" count="2" type="stmt"/>
+        <line num="146" count="2" type="stmt"/>
+        <line num="149" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="150" count="1" type="stmt"/>
+        <line num="151" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="152" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="154" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="155" count="0" type="stmt"/>
+        <line num="158" count="1" type="stmt"/>
+        <line num="162" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="164" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="165" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="166" count="0" type="stmt"/>
+        <line num="169" count="0" type="stmt"/>
+        <line num="172" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="173" count="0" type="stmt"/>
+        <line num="177" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="178" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="179" count="2" type="stmt"/>
+        <line num="182" count="2" type="stmt"/>
+        <line num="194" count="2" type="stmt"/>
+        <line num="206" count="4" type="stmt"/>
+        <line num="210" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="211" count="1" type="stmt"/>
+        <line num="215" count="3" type="stmt"/>
+        <line num="216" count="3" type="stmt"/>
+        <line num="218" count="3" type="stmt"/>
+        <line num="227" count="2" type="stmt"/>
+        <line num="231" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="232" count="1" type="stmt"/>
+        <line num="235" count="1" type="stmt"/>
+        <line num="238" count="1" type="stmt"/>
+        <line num="241" count="1" type="cond" truecount="2" falsecount="2"/>
+        <line num="242" count="0" type="stmt"/>
+        <line num="245" count="1" type="stmt"/>
+        <line num="260" count="1" type="stmt"/>
+        <line num="262" count="1" type="stmt"/>
+        <line num="269" count="1" type="stmt"/>
+        <line num="271" count="1" type="stmt"/>
+        <line num="281" count="1" type="stmt"/>
+        <line num="283" count="1" type="stmt"/>
+        <line num="285" count="1" type="stmt"/>
+        <line num="297" count="1" type="stmt"/>
+        <line num="299" count="1" type="stmt"/>
+        <line num="306" count="2" type="stmt"/>
+        <line num="310" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="311" count="0" type="stmt"/>
+        <line num="314" count="2" type="stmt"/>
+        <line num="315" count="2" type="stmt"/>
+        <line num="323" count="1" type="stmt"/>
+        <line num="325" count="1" type="stmt"/>
+        <line num="337" count="1" type="stmt"/>
+        <line num="339" count="1" type="stmt"/>
+        <line num="349" count="2" type="stmt"/>
+        <line num="351" count="2" type="stmt"/>
+        <line num="354" count="2" type="cond" truecount="4" falsecount="0"/>
+        <line num="355" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="356" count="1" type="stmt"/>
+        <line num="360" count="1" type="stmt"/>
+        <line num="378" count="2" type="stmt"/>
+        <line num="380" count="2" type="stmt"/>
+        <line num="381" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="382" count="1" type="stmt"/>
+        <line num="385" count="2" type="stmt"/>
+        <line num="392" count="1" type="stmt"/>
+        <line num="396" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="397" count="0" type="stmt"/>
+        <line num="400" count="1" type="stmt"/>
+        <line num="401" count="1" type="stmt"/>
+        <line num="409" count="0" type="stmt"/>
+        <line num="412" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="413" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="414" count="0" type="stmt"/>
+        <line num="418" count="0" type="stmt"/>
+        <line num="432" count="1" type="stmt"/>
+        <line num="434" count="1" type="stmt"/>
+        <line num="441" count="0" type="stmt"/>
+        <line num="443" count="0" type="stmt"/>
+        <line num="453" count="1" type="stmt"/>
+        <line num="455" count="1" type="stmt"/>
+        <line num="457" count="1" type="stmt"/>
+        <line num="468" count="0" type="stmt"/>
+        <line num="470" count="0" type="stmt"/>
+        <line num="477" count="0" type="stmt"/>
+        <line num="481" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="482" count="0" type="stmt"/>
+        <line num="485" count="0" type="stmt"/>
+        <line num="486" count="0" type="stmt"/>
+        <line num="494" count="0" type="stmt"/>
+        <line num="496" count="0" type="stmt"/>
+        <line num="507" count="0" type="stmt"/>
+        <line num="509" count="0" type="stmt"/>
+        <line num="519" count="1" type="stmt"/>
+        <line num="521" count="1" type="stmt"/>
+        <line num="523" count="1" type="stmt"/>
+        <line num="538" count="1" type="stmt"/>
+        <line num="540" count="1" type="stmt"/>
+        <line num="551" count="0" type="stmt"/>
+        <line num="555" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="556" count="0" type="stmt"/>
+        <line num="559" count="0" type="stmt"/>
+        <line num="561" count="0" type="stmt"/>
+        <line num="576" count="0" type="stmt"/>
+        <line num="580" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="581" count="0" type="stmt"/>
+        <line num="584" count="0" type="stmt"/>
+        <line num="586" count="0" type="stmt"/>
+        <line num="599" count="2" type="stmt"/>
+        <line num="602" count="2" type="stmt"/>
+        <line num="605" count="2" type="stmt"/>
+        <line num="607" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="608" count="1" type="stmt"/>
+        <line num="609" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="610" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="612" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="613" count="0" type="stmt"/>
+        <line num="616" count="1" type="stmt"/>
+        <line num="621" count="2" type="stmt"/>
+        <line num="644" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.medical-history.dto">
+      <metrics statements="84" coveredstatements="79" conditionals="0" coveredconditionals="0" methods="16" coveredmethods="11"/>
+      <file name="create-allergy.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\create-allergy.dto.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+      </file>
+      <file name="create-family-history.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\create-family-history.dto.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+      </file>
+      <file name="create-lifestyle.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\create-lifestyle.dto.ts">
+        <metrics statements="13" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="39" count="2" type="stmt"/>
+        <line num="44" count="2" type="stmt"/>
+      </file>
+      <file name="create-medical-history.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\create-medical-history.dto.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="21" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="28" count="2" type="stmt"/>
+      </file>
+      <file name="create-medication.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\create-medication.dto.ts">
+        <metrics statements="9" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
+        <line num="31" count="2" type="stmt"/>
+      </file>
+      <file name="index.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\index.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="11" coveredmethods="11"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="3" count="6" type="stmt"/>
+        <line num="4" count="6" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="6" count="6" type="stmt"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="8" count="6" type="stmt"/>
+        <line num="9" count="6" type="stmt"/>
+        <line num="10" count="6" type="stmt"/>
+        <line num="11" count="6" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+      </file>
+      <file name="query-medical-history.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\query-medical-history.dto.ts">
+        <metrics statements="12" coveredstatements="9" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="6" count="0" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="2" type="stmt"/>
+        <line num="29" count="2" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+      </file>
+      <file name="update-allergy.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\update-allergy.dto.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+      <file name="update-family-history.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\update-family-history.dto.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+      <file name="update-lifestyle.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\update-lifestyle.dto.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+      <file name="update-medical-history.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\update-medical-history.dto.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+      </file>
+      <file name="update-medication.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\dto\update-medication.dto.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.medical-history.interfaces">
+      <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+      <file name="medical-history.interfaces.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\medical-history\interfaces\medical-history.interfaces.ts">
+        <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="37" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="41" count="3" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+      </file>
+    </package>
     <package name="src.notifications">
       <metrics statements="29" coveredstatements="24" conditionals="12" coveredconditionals="9" methods="11" coveredmethods="6"/>
-      <file name="notifications.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\notifications\notifications.controller.ts">
+      <file name="notifications.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\notifications\notifications.controller.ts">
         <metrics statements="16" coveredstatements="16" conditionals="12" coveredconditionals="9" methods="6" coveredmethods="6"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -448,7 +861,7 @@
         <line num="31" count="2" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
       </file>
-      <file name="notifications.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\notifications\notifications.module.ts">
+      <file name="notifications.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\notifications\notifications.module.ts">
         <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -457,7 +870,7 @@
         <line num="5" count="1" type="stmt"/>
         <line num="16" count="1" type="stmt"/>
       </file>
-      <file name="notifications.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\notifications\notifications.service.ts">
+      <file name="notifications.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\notifications\notifications.service.ts">
         <metrics statements="7" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="6" count="2" type="stmt"/>
@@ -470,7 +883,7 @@
     </package>
     <package name="src.notifications.consumers">
       <metrics statements="7" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="alerts.consumer.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\notifications\consumers\alerts.consumer.ts">
+      <file name="alerts.consumer.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\notifications\consumers\alerts.consumer.ts">
         <metrics statements="7" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="5" count="1" type="stmt"/>
@@ -483,11 +896,11 @@
     </package>
     <package name="src.notifications.dto">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-notification.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\notifications\dto\create-notification.dto.ts">
+      <file name="create-notification.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\notifications\dto\create-notification.dto.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
       </file>
-      <file name="update-notification.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\notifications\dto\update-notification.dto.ts">
+      <file name="update-notification.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\notifications\dto\update-notification.dto.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -496,14 +909,14 @@
     </package>
     <package name="src.notifications.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="notification.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\notifications\entities\notification.entity.ts">
+      <file name="notification.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\notifications\entities\notification.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.parameters">
       <metrics statements="22" coveredstatements="22" conditionals="8" coveredconditionals="6" methods="8" coveredmethods="8"/>
-      <file name="parameters.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\parameters\parameters.controller.ts">
+      <file name="parameters.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\parameters\parameters.controller.ts">
         <metrics statements="11" coveredstatements="11" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -517,14 +930,14 @@
         <line num="21" count="2" type="stmt"/>
         <line num="22" count="1" type="stmt"/>
       </file>
-      <file name="parameters.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\parameters\parameters.module.ts">
+      <file name="parameters.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\parameters\parameters.module.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
-      <file name="parameters.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\parameters\parameters.service.ts">
+      <file name="parameters.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\parameters\parameters.service.ts">
         <metrics statements="7" coveredstatements="7" conditionals="4" coveredconditionals="3" methods="4" coveredmethods="4"/>
         <line num="1" count="3" type="stmt"/>
         <line num="2" count="3" type="stmt"/>
@@ -537,11 +950,11 @@
     </package>
     <package name="src.parameters.dto">
       <metrics statements="4" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-parameter.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\parameters\dto\create-parameter.dto.ts">
+      <file name="create-parameter.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\parameters\dto\create-parameter.dto.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
-      <file name="update-parameter.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\parameters\dto\update-parameter.dto.ts">
+      <file name="update-parameter.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\parameters\dto\update-parameter.dto.ts">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -550,15 +963,15 @@
     </package>
     <package name="src.parameters.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="parameter.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\parameters\entities\parameter.entity.ts">
+      <file name="parameter.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\parameters\entities\parameter.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.patients">
-      <metrics statements="38" coveredstatements="38" conditionals="22" coveredconditionals="15" methods="13" coveredmethods="13"/>
-      <file name="patients.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\patients\patients.controller.ts">
-        <metrics statements="17" coveredstatements="17" conditionals="12" coveredconditionals="9" methods="6" coveredmethods="6"/>
+      <metrics statements="41" coveredstatements="39" conditionals="22" coveredconditionals="15" methods="15" coveredmethods="13"/>
+      <file name="patients.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\patients\patients.controller.ts">
+        <metrics statements="19" coveredstatements="18" conditionals="12" coveredconditionals="9" methods="7" coveredmethods="6"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
         <line num="3" count="2" type="stmt"/>
@@ -575,17 +988,19 @@
         <line num="28" count="2" type="cond" truecount="3" falsecount="1"/>
         <line num="29" count="1" type="stmt"/>
         <line num="33" count="2" type="stmt"/>
-        <line num="34" count="1" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="38" count="2" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
       </file>
-      <file name="patients.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\patients\patients.module.ts">
+      <file name="patients.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\patients\patients.module.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
-      <file name="patients.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\patients\patients.service.ts">
-        <metrics statements="17" coveredstatements="17" conditionals="10" coveredconditionals="6" methods="7" coveredmethods="7"/>
+      <file name="patients.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\patients\patients.service.ts">
+        <metrics statements="18" coveredstatements="17" conditionals="10" coveredconditionals="6" methods="8" coveredmethods="7"/>
         <line num="1" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
         <line num="5" count="3" type="stmt"/>
@@ -602,16 +1017,24 @@
         <line num="58" count="1" type="stmt"/>
         <line num="65" count="1" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
+        <line num="79" count="0" type="stmt"/>
+        <line num="90" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.patients.dto">
-      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-patient.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\patients\dto\create-patient.dto.ts">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <metrics statements="11" coveredstatements="11" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="create-patient.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\patients\dto\create-patient.dto.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="23" count="2" type="stmt"/>
       </file>
-      <file name="update-patient.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\patients\dto\update-patient.dto.ts">
+      <file name="update-patient.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\patients\dto\update-patient.dto.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -620,31 +1043,31 @@
     </package>
     <package name="src.patients.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="patient.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\patients\entities\patient.entity.ts">
+      <file name="patient.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\patients\entities\patient.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.prisma">
       <metrics statements="8" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-      <file name="prisma.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\prisma\prisma.module.ts">
+      <file name="prisma.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\prisma\prisma.module.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
-      <file name="prisma.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\prisma\prisma.service.ts">
+      <file name="prisma.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\prisma\prisma.service.ts">
         <metrics statements="5" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="23" type="stmt"/>
-        <line num="2" count="23" type="stmt"/>
-        <line num="5" count="23" type="stmt"/>
+        <line num="1" count="25" type="stmt"/>
+        <line num="2" count="25" type="stmt"/>
+        <line num="5" count="25" type="stmt"/>
         <line num="7" count="0" type="stmt"/>
         <line num="11" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.queue">
       <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <file name="queue.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\queue\queue.module.ts">
+      <file name="queue.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\queue\queue.module.ts">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
@@ -655,7 +1078,7 @@
     </package>
     <package name="src.users">
       <metrics statements="35" coveredstatements="35" conditionals="18" coveredconditionals="13" methods="13" coveredmethods="13"/>
-      <file name="users.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\users\users.controller.ts">
+      <file name="users.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\users\users.controller.ts">
         <metrics statements="17" coveredstatements="17" conditionals="12" coveredconditionals="9" methods="6" coveredmethods="6"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -675,14 +1098,14 @@
         <line num="33" count="2" type="stmt"/>
         <line num="34" count="1" type="stmt"/>
       </file>
-      <file name="users.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\users\users.module.ts">
+      <file name="users.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\users\users.module.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="10" count="1" type="stmt"/>
       </file>
-      <file name="users.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\users\users.service.ts">
+      <file name="users.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\users\users.service.ts">
         <metrics statements="14" coveredstatements="14" conditionals="6" coveredconditionals="4" methods="7" coveredmethods="7"/>
         <line num="1" count="6" type="stmt"/>
         <line num="4" count="6" type="stmt"/>
@@ -702,11 +1125,11 @@
     </package>
     <package name="src.users.dto">
       <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-user.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\users\dto\create-user.dto.ts">
+      <file name="create-user.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\users\dto\create-user.dto.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="3" type="stmt"/>
       </file>
-      <file name="update-user.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\users\dto\update-user.dto.ts">
+      <file name="update-user.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\users\dto\update-user.dto.ts">
         <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -715,14 +1138,14 @@
     </package>
     <package name="src.users.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="user.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\users\entities\user.entity.ts">
+      <file name="user.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\users\entities\user.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
     </package>
     <package name="src.vitals">
       <metrics statements="22" coveredstatements="22" conditionals="12" coveredconditionals="9" methods="7" coveredmethods="7"/>
-      <file name="vitals.controller.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\vitals\vitals.controller.ts">
+      <file name="vitals.controller.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\vitals\vitals.controller.ts">
         <metrics statements="12" coveredstatements="12" conditionals="8" coveredconditionals="6" methods="4" coveredmethods="4"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="2" type="stmt"/>
@@ -737,14 +1160,14 @@
         <line num="22" count="2" type="stmt"/>
         <line num="23" count="1" type="stmt"/>
       </file>
-      <file name="vitals.module.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\vitals\vitals.module.ts">
+      <file name="vitals.module.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\vitals\vitals.module.ts">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
         <line num="9" count="1" type="stmt"/>
       </file>
-      <file name="vitals.service.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\vitals\vitals.service.ts">
+      <file name="vitals.service.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\vitals\vitals.service.ts">
         <metrics statements="6" coveredstatements="6" conditionals="4" coveredconditionals="3" methods="3" coveredmethods="3"/>
         <line num="1" count="3" type="stmt"/>
         <line num="4" count="3" type="stmt"/>
@@ -756,11 +1179,11 @@
     </package>
     <package name="src.vitals.dto">
       <metrics statements="4" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="create-vital.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\vitals\dto\create-vital.dto.ts">
+      <file name="create-vital.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\vitals\dto\create-vital.dto.ts">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="2" type="stmt"/>
       </file>
-      <file name="update-vital.dto.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\vitals\dto\update-vital.dto.ts">
+      <file name="update-vital.dto.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\vitals\dto\update-vital.dto.ts">
         <metrics statements="3" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
         <line num="2" count="0" type="stmt"/>
@@ -769,7 +1192,7 @@
     </package>
     <package name="src.vitals.entities">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-      <file name="vital.entity.ts" path="C:\Users\Silvia Subirana\Documents\uniHealthA\backend\src\vitals\entities\vital.entity.ts">
+      <file name="vital.entity.ts" path="C:\Users\daswi\OneDrive\Documents\UnihealthA\src\vitals\entities\vital.entity.ts">
         <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="0" type="stmt"/>
       </file>
