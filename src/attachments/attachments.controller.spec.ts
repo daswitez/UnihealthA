@@ -39,6 +39,7 @@ describe('AttachmentsController', () => {
       'clinical_record',
       1,
       3,
+      undefined, // category is optional and not provided in test
     );
   });
 

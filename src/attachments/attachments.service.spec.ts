@@ -41,9 +41,10 @@ describe('AttachmentsService', () => {
     expect(prismaMock.attachment!.create).toHaveBeenCalledWith({
       data: {
         ownerTable: 'clinical_record',
-        ownerId: 1,
+        ownerId: BigInt(1),
         fileName: fakeFile.originalname,
         mimeType: fakeFile.mimetype,
+        category: undefined, // optional category parameter
         storagePath: fakeFile.path,
         sizeBytes: fakeFile.size,
         createdById: 2,

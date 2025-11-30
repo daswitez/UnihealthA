@@ -90,7 +90,7 @@ describe('PatientsService', () => {
 
     await service.update(1, dto);
     expect(prismaMock.patientProfile!.update).toHaveBeenCalledWith({
-      where: { userId: 1 },
+      where: { userId: BigInt(1) },
       data: {
         firstName: dto.firstName,
         lastName: dto.lastName,
@@ -102,7 +102,7 @@ describe('PatientsService', () => {
 
   it('remove should delegate to prisma.user.delete', async () => {
     await service.remove(1);
-    expect(prismaMock.user!.delete).toHaveBeenCalledWith({ where: { id: 1 } });
+    expect(prismaMock.user!.delete).toHaveBeenCalledWith({ where: { id: BigInt(1) } });
   });
 });
 
