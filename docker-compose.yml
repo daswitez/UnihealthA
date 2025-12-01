@@ -13,6 +13,9 @@ services:
       - '5433:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      # Initialize schema + seed data on first boot
+      - ./full-schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
+      - ./manual-seed.sql:/docker-entrypoint-initdb.d/002-seed.sql:ro
     networks:
       - app-network
 

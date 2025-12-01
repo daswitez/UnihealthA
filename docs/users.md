@@ -9,6 +9,7 @@ Campos típicos:
 
 - `email: string`
 - `password: string`
+- `name: string` (opcional)
 
 El servicio:
 - Hashea el password (`bcrypt`).
@@ -26,7 +27,8 @@ El servicio:
 ```json
 {
   "email": "user@example.com",
-  "password": "Password123!"
+  "password": "Password123!",
+  "name": "John Doe"
 }
 ```
 
@@ -46,10 +48,10 @@ Frontend:
 ```ts
 import { apiFetch } from './apiClient'; // ver ejemplo en docs/auth.md
 
-export const createUser = (token: string, email: string, password: string) =>
+export const createUser = (token: string, email: string, password: string, name?: string) =>
   apiFetch('/users', {
     method: 'POST',
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ email, password, name }),
   }, token);
 ```
 

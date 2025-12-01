@@ -13,11 +13,11 @@ Representa mediciones puntuales de signos vitales (`Vitals`), tomadas por un usu
 ```json
 {
   "patientId": 1,
-  "systolicBP": 120,
-  "diastolicBP": 80,
-  "heartRate": 72,
-  "tempC": 36.5,
-  "spo2": 98
+  "systolicBP": 120, // Opcional
+  "diastolicBP": 80, // Opcional
+  "heartRate": 72,   // Opcional
+  "tempC": 36.5,     // Opcional
+  "spo2": 98         // Opcional
 }
 ```
 

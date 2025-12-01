@@ -18,7 +18,8 @@ Un paciente se modela como:
   "lastName": "Doe",
   "dob": "1980-01-01",
   "gender": "F",
-  "email": "jane.doe@example.com"
+  "email": "jane.doe@example.com",
+  "phone": "+1234567890"
 }
 ```
 
@@ -38,6 +39,7 @@ export const createPatient = (token: string, payload: {
   dob: string;
   gender: string;
   email?: string;
+  phone?: string;
 }) =>
   apiFetch('/patients', {
     method: 'POST',
@@ -87,7 +89,19 @@ Devuelve usuarios que tienen perfil de paciente:
 
 Esto actualiza la fila en `perfiles_paciente` ligada al usuario con ese `id`.
 
-### 5. Eliminar paciente
+### 5. Actualizar estilo de vida
+- **PATCH** `/patients/:id/lifestyle`
+- Body:
+
+```json
+{
+  "isSmoker": false,
+  "alcohol": "occasional",
+  "activity": "moderate"
+}
+```
+
+### 6. Eliminar paciente
 
 - **DELETE** `/patients/:id`
 
