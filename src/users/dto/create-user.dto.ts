@@ -13,4 +13,8 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   name?: string;
+
+  @IsString()
+  @IsOptional()
+  role?: string; // 'user', 'doctor', 'nurse', 'admin', 'patient'
 }

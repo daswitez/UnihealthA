@@ -11,19 +11,22 @@ export class UsersService {
   async create(createUserDto: CreateUserDto) {
     const hashedPassword = await bcrypt.hash(createUserDto.password, 10);
     
-    // Por defecto asignamos rol 'user' si no se especifica.
-    // Buscamos el ID del rol 'user'.
-    const defaultRole = await this.prisma.role.findUnique({ where: { name: 'user' } });
+    // Buscar el rol especificado o usar 'user' por defecto
+    const roleName = createUserDto.role || 'user';
+    const role = await this.prisma.role.findUnique({ where: { name: roleName } });
     
-    // Si no existe el rol (no debería pasar si corrió el seed), usamos 1 como fallback o lanzamos error.
-    const roleId = defaultRole ? defaultRole.id : 1;
+    if (!role) {
+      throw new Error(`Role '${roleName}' not found`);
+    }
 
     return this.prisma.user.create({
       data: {
         email: createUserDto.email,
         passwordHash: hashedPassword,
-        roleId: roleId,
-        // name no existe en User, se debe crear PatientProfile si es necesario, pero por ahora lo omitimos
+        roleId: role.id,
+      },
+      include: {
+        role: true,
       },
     });
   }
