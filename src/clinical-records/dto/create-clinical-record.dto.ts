@@ -1,5 +1,13 @@
+import { IsNumber, IsString, IsOptional } from 'class-validator';
+
 export class CreateClinicalRecordDto {
+  @IsNumber()
   patientId: number;
+
+  @IsNumber()
   noteTypeId: number;
-  note: string;
+
+  @IsString()
+  @IsOptional()
+  note?: string;
 }
