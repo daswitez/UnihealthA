@@ -14,6 +14,15 @@ describe('AppointmentsService', () => {
       findUnique: jest.fn(),
       update: jest.fn(),
     } as any,
+    role: {
+      findUnique: jest.fn(),
+    } as any,
+    user: {
+      findMany: jest.fn(),
+    } as any,
+    serviceType: {
+      findMany: jest.fn(),
+    } as any,
   };
 
   beforeEach(async () => {
@@ -91,6 +100,74 @@ describe('AppointmentsService', () => {
     expect(prismaMock.appointment!.update).toHaveBeenCalledWith({
       where: { id: 1 },
       data: { status: dto.status },
+    });
+  });
+
+  describe('getAvailableDoctors', () => {
+    it('should return empty array when doctor role does not exist', async () => {
+      (prismaMock.role!.findUnique as jest.Mock).mockResolvedValueOnce(null);
+
+      const result = await appointmentsService.getAvailableDoctors();
+
+      expect(result).toEqual([]);
+    });
+
+    it('should return active doctors when role exists', async () => {
+      const doctorRole = { id: 2, name: 'doctor' };
+      const doctors = [{ id: 1n, email: 'doctor@test.com', role: { name: 'doctor' } }];
+      (prismaMock.role!.findUnique as jest.Mock).mockResolvedValueOnce(doctorRole);
+      (prismaMock.user!.findMany as jest.Mock).mockResolvedValueOnce(doctors);
+
+      const result = await appointmentsService.getAvailableDoctors();
+
+      expect(prismaMock.user!.findMany).toHaveBeenCalledWith({
+        where: { roleId: 2, isActive: true },
+        select: { id: true, email: true, role: { select: { name: true } } },
+      });
+      expect(result).toEqual(doctors);
+    });
+  });
+
+  describe('getAvailableNurses', () => {
+    it('should return empty array when nurse role does not exist', async () => {
+      (prismaMock.role!.findUnique as jest.Mock).mockResolvedValueOnce(null);
+
+      const result = await appointmentsService.getAvailableNurses();
+
+      expect(result).toEqual([]);
+    });
+
+    it('should return active nurses when role exists', async () => {
+      const nurseRole = { id: 3, name: 'nurse' };
+      const nurses = [{ id: 2n, email: 'nurse@test.com', role: { name: 'nurse' } }];
+      (prismaMock.role!.findUnique as jest.Mock).mockResolvedValueOnce(nurseRole);
+      (prismaMock.user!.findMany as jest.Mock).mockResolvedValueOnce(nurses);
+
+      const result = await appointmentsService.getAvailableNurses();
+
+      expect(prismaMock.user!.findMany).toHaveBeenCalledWith({
+        where: { roleId: 3, isActive: true },
+        select: { id: true, email: true, role: { select: { name: true } } },
+      });
+      expect(result).toEqual(nurses);
+    });
+  });
+
+  describe('getServiceTypes', () => {
+    it('should return active service types', async () => {
+      const serviceTypes = [
+        { id: 1, code: 'CONS', name: 'Consulta' },
+        { id: 2, code: 'VAC', name: 'Vacunación' },
+      ];
+      (prismaMock.serviceType!.findMany as jest.Mock).mockResolvedValueOnce(serviceTypes);
+
+      const result = await appointmentsService.getServiceTypes();
+
+      expect(prismaMock.serviceType!.findMany).toHaveBeenCalledWith({
+        where: { isActive: true },
+        select: { id: true, code: true, name: true },
+      });
+      expect(result).toEqual(serviceTypes);
     });
   });
 });
