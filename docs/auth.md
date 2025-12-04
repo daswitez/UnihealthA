@@ -1,118 +1,254 @@
-## Auth – Registro y Login
+# Auth API - Autenticación y Registro
 
-### Rutas base
+**Base URL**: `http://54.166.181.144:3000/auth`  
+**Auth**: No requiere autenticación (endpoints públicos)
 
-- Base URL módulo: `/auth`
+---
+
+## 📋 Endpoints
 
 ### 1. Registro de usuario
 
-- **POST** `/auth/register`
-- **Body**:
+```http
+POST http://54.166.181.144:3000/auth/register
+Content-Type: application/json
 
-```json
 {
   "email": "user@example.com",
-  "password": "Password123!"
+  "password": "Password123!",
+  "name": "John Doe"
 }
 ```
 
-Respuesta:
+**Campos:**
+- `email` (string, requerido) - Email válido único
+- `password` (string, requerido) - Mínimo 6 caracteres
+- `name` (string, opcional) - Nombre del usuario
+
+**Respuesta exitosa (201):**
 
 ```json
 {
-  "access_token": "JWT_TOKEN",
-  "id": 1,
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "id": "1",
   "email": "user@example.com",
   "role": "user"
 }
 ```
 
-Uso desde frontend (TypeScript, `fetch`):
+**Ejemplo con JavaScript:**
 
-```ts
-const register = async (email: string, password: string) => {
-  const res = await fetch('http://localhost:3000/auth/register', {
+```javascript
+const register = async (email, password, name) => {
+  const response = await fetch('http://54.166.181.144:3000/auth/register', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password }),
+    headers: { 
+      'Content-Type': 'application/json' 
+    },
+    body: JSON.stringify({ email, password, name }),
   });
 
-  if (!res.ok) {
-    throw new Error('Registro fallido');
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || 'Registro fallido');
   }
 
-  return res.json() as Promise<{
-    access_token: string;
-    id: number;
-    email: string;
-    role: string;
-  }>;
+  return response.json();
 };
+
+// Uso
+try {
+  const result = await register('user@example.com', 'Password123!', 'John Doe');
+  console.log('Token:', result.access_token);
+  // Guardar token en localStorage o estado
+  localStorage.setItem('token', result.access_token);
+} catch (error) {
+  console.error('Error:', error.message);
+}
 ```
+
+---
 
 ### 2. Login
 
-- **POST** `/auth/login`
-- Usa la estrategia `local` (email + password).
+```http
+POST http://54.166.181.144:3000/auth/login
+Content-Type: application/json
 
-Body:
-
-```json
 {
   "email": "user@example.com",
   "password": "Password123!"
 }
 ```
 
-Respuesta: mismo formato que registro (`access_token`, `id`, `email`, `role`).
+**Campos:**
+- `email` (string, requerido)
+- `password` (string, requerido)
 
-Frontend:
+**Respuesta exitosa (200):**
 
-```ts
-const login = async (email: string, password: string) => {
-  const res = await fetch('http://localhost:3000/auth/login', {
+```json
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "id": "1",
+  "email": "user@example.com",
+  "role": "user"
+}
+```
+
+**Errores comunes:**
+
+| Código | Mensaje |
+|--------|---------|
+| `401` | Credenciales inválidas |
+| `400` | Email o password faltante |
+
+**Ejemplo con JavaScript:**
+
+```javascript
+const login = async (email, password) => {
+  const response = await fetch('http://54.166.181.144:3000/auth/login', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json' 
+    },
     body: JSON.stringify({ email, password }),
   });
 
-  if (!res.ok) {
-    throw new Error('Login inválido');
+  if (!response.ok) {
+    throw new Error('Credenciales inválidas');
   }
 
-  return res.json();
+  return response.json();
 };
+
+// Uso
+try {
+  const result = await login('user@example.com', 'Password123!');
+  localStorage.setItem('token', result.access_token);
+  localStorage.setItem('userId', result.id);
+  console.log('Login exitoso');
+} catch (error) {
+  console.error('Error:', error.message);
+}
 ```
 
-### 3. Uso del JWT en otros módulos
+---
 
-Todos los módulos protegidos usan `@UseGuards(AuthGuard('jwt'))`.  
-Debes enviar el token en la cabecera:
+## 🔐 Uso del JWT en endpoints protegidos
+
+Después de login o register, usa el `access_token` en la cabecera `Authorization`:
 
 ```http
-Authorization: Bearer JWT_TOKEN
+GET http://54.166.181.144:3000/patients
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
 
-Ejemplo genérico de cliente HTTP reutilizable:
+### Función reutilizable para API calls
 
-```ts
-const apiFetch = async <T>(path: string, options: RequestInit = {}, token?: string): Promise<T> => {
-  const res = await fetch(`http://localhost:3000${path}`, {
+```javascript
+// Helper function para hacer peticiones autenticadas
+const apiFetch = async (path, options = {}) => {
+  const token = localStorage.getItem('token');
+  
+  const response = await fetch(`http://54.166.181.144:3000${path}`, {
     ...options,
     headers: {
       'Content-Type': 'application/json',
-      ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options.headers || {}),
+      ...(token && { 'Authorization': `Bearer ${token}` }),
+      ...options.headers,
     },
   });
 
-  if (!res.ok) {
-    const errorBody = await res.json().catch(() => ({}));
-    throw new Error(errorBody.message ?? `Error HTTP ${res.status}`);
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    throw new Error(error.message || `Error HTTP ${response.status}`);
   }
 
-  return res.json() as Promise<T>;
+  return response.json();
 };
+
+// Uso
+const patients = await apiFetch('/patients');
+const newPatient = await apiFetch('/patients', {
+  method: 'POST',
+  body: JSON.stringify({
+    firstName: 'Jane',
+    lastName: 'Doe',
+    dob: '1990-01-01',
+    gender: 'F',
+  }),
+});
 ```
 
+---
+
+## 💡 Ejemplo completo de flujo de autenticación
+
+```javascript
+// 1. Login
+async function loginUser(email, password) {
+  try {
+    const response = await fetch('http://54.166.181.144:3000/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Login fallido');
+    }
+
+    const data = await response.json();
+    
+    // Guardar token y datos del usuario
+    localStorage.setItem('token', data.access_token);
+    localStorage.setItem('userId', data.id);
+    localStorage.setItem('userEmail', data.email);
+    localStorage.setItem('userRole', data.role);
+    
+    return data;
+  } catch (error) {
+    console.error('Error al hacer login:', error);
+    throw error;
+  }
+}
+
+// 2. Hacer peticiones autenticadas
+async function getPatients() {
+  const token = localStorage.getItem('token');
+  
+  const response = await fetch('http://54.166.181.144:3000/patients', {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+  
+  return response.json();
+}
+
+// 3. Logout
+function logout() {
+  localStorage.removeItem('token');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('userEmail');
+  localStorage.removeItem('userRole');
+}
+
+// Uso
+await loginUser('user@example.com', 'Password123!');
+const patients = await getPatients();
+logout();
+```
+
+---
+
+## 📌 Notas importantes
+
+- 🔒 **Expiración**: Los tokens JWT expiran después de 24 horas
+- 🔐 **Password**: Mínimo 6 caracteres requeridos
+- ✉️ **Email**: Debe ser único en el sistema
+- 🔑 **Token**: Almacenar de forma segura (localStorage/cookies)
+- 🚫 **Roles**: Por defecto, los usuarios registrados obtienen rol `'user'`
 

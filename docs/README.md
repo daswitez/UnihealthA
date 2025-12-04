@@ -1,36 +1,34 @@
-## Visión general de la API
+# UniHealth API Documentation
 
-Este backend es una API REST construida con NestJS, Prisma, PostgreSQL, Redis y BullMQ.  
-Se expone típicamente desde Docker en:
+## 🌐 Base URL
 
-- **Base URL**: `http://localhost:3000`
-- **Panel de colas (Bull Board)**: `http://localhost:3000/admin/queues`
+**Production**: `http://54.166.181.144:3000`
 
-Para entorno de desarrollo se recomienda:
-
-```bash
-# 1) Levantar toda la infraestructura
-npm run docker:up
-
-# 2) (solo primera vez) aplicar schema y datos iniciales
-docker exec -i postgres_db psql -U admin -d nestjs_db < full-schema.sql
-docker exec -i postgres_db psql -U admin -d nestjs_db < manual-seed.sql
-```
-
-La API queda disponible inmediatamente en `http://localhost:3000`.
+Esta es la URL base para todas las peticiones API en producción. Todos los endpoints documentados deben usar esta URL.
 
 ---
 
-## Autenticación
+## 🔐 Autenticación
 
 La mayoría de los endpoints están protegidos por **JWT Bearer** usando la estrategia `jwt` de NestJS.
 
-### Registro y login
-
-1. **Registrar usuario**
+### 1. Registro de usuario
 
 ```http
-POST /auth/register
+POST http://54.166.181.144:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "Password123!",
+  "name": "John Doe"
+}
+```
+
+### 2. Login
+
+```http
+POST http://54.166.181.144:3000/auth/login
 Content-Type: application/json
 
 {
@@ -39,19 +37,7 @@ Content-Type: application/json
 }
 ```
 
-2. **Login**
-
-```http
-POST /auth/login
-Content-Type: application/json
-
-{
-  "email": "user@example.com",
-  "password": "Password123!"
-}
-```
-
-**Respuesta de login / register**:
+**Respuesta exitosa**:
 
 ```json
 {
@@ -62,19 +48,19 @@ Content-Type: application/json
 }
 ```
 
-3. **Usar el token en el resto de llamadas**
+### 3. Usar el token en peticiones protegidas
 
 ```http
-GET /patients
+GET http://54.166.181.144:3000/patients
 Authorization: Bearer <access_token>
 ```
 
-En frontend (fetch):
+**Ejemplo con JavaScript (fetch)**:
 
-```ts
-const token = '<access_token>';
+```javascript
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...';
 
-const response = await fetch('http://localhost:3000/patients', {
+const response = await fetch('http://54.166.181.144:3000/patients', {
   headers: {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json',
@@ -83,32 +69,147 @@ const response = await fetch('http://localhost:3000/patients', {
 const data = await response.json();
 ```
 
+**Ejemplo con Axios**:
+
+```javascript
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: 'http://54.166.181.144:3000',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
+  },
+});
+
+const patients = await api.get('/patients');
+```
+
 ---
 
-## Convenciones generales
+## 📋 Convenciones generales
 
-- **Formato JSON** en todas las peticiones/respuestas.
-- **Fechas** en formato ISO 8601 (`new Date().toISOString()`).
-- **ID numéricos**: internamente pueden ser `BigInt`, pero la API devuelve números normales.
-- **Errores**:
-  - 400: Validación (`BadRequestException`)
-  - 401: Falta de autenticación (`Unauthorized`)
-  - 404: Recurso no encontrado
+- **Formato**: Todas las peticiones y respuestas usan JSON
+- **Fechas**: Formato ISO 8601 (`2024-12-04T15:30:00Z`)
+- **IDs**: Números enteros (BigInt convertido a número en JSON)
+- **Validación**: Todos los DTOs usan `class-validator`
 
-Ejemplo de error:
+### Códigos de estado HTTP
+
+| Código | Significado |
+|--------|-------------|
+| `200` | OK - Operación exitosa |
+| `201` | Created - Recurso creado exitosamente |
+| `400` | Bad Request - Error de validación |
+| `401` | Unauthorized - No autenticado |
+| `403` | Forbidden - Sin permisos |
+| `404` | Not Found - Recurso no encontrado |
+| `500` | Internal Server Error - Error del servidor |
+
+### Ejemplo de error
 
 ```json
 {
   "statusCode": 400,
-  "message": "El enfermero ya tiene una cita en ese horario.",
+  "message": [
+    "email must be an email",
+    "password must be longer than 6 characters"
+  ],
   "error": "Bad Request"
 }
 ```
 
 ---
 
-## Módulos documentados
+## 📚 Módulos de la API
 
-Consulta esos archivos para ver el detalle de cada CRUD y ejemplos de consumo desde frontend.
+Cada módulo tiene su propia documentación detallada:
 
+### Seguridad y Usuarios
+- [**Auth**](./auth.md) - Autenticación y registro (`/auth`)
+- [**Users**](./users.md) - Gestión de usuarios (`/users`)
+
+### Pacientes y Perfiles
+- [**Patients**](./patients.md) - Perfiles de pacientes (`/patients`)
+- [**Medical History**](./medical-history.md) - Historial médico completo (`/medical-history`)
+
+### Clínica y Atención
+- [**Clinical Records**](./clinical-records.md) - Registros clínicos (`/clinical-records`)
+- [**Vitals**](./vitals.md) - Signos vitales (`/vitals`)
+- [**Appointments**](./appointments.md) - Citas médicas (`/appointments`)
+
+### Alertas y Notificaciones
+- [**Alerts**](./alerts.md) - Sistema de alertas (`/alerts`)
+- [**Notifications**](./notifications.md) - Notificaciones (`/notifications`)
+
+### Archivos y Configuración
+- [**Attachments**](./attachments.md) - Gestión de archivos (`/attachments`)
+- [**Parameters**](./parameters.md) - Parámetros del sistema (`/parameters`)
+- [**Catalogs**](./catalogs.md) - Catálogos y tipos (`/catalogs`)
+
+---
+
+## 🚀 Inicio rápido
+
+### 1. Registrar un usuario
+
+```bash
+curl -X POST http://54.166.181.144:3000/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "Test123!",
+    "name": "Test User"
+  }'
+```
+
+### 2. Obtener token
+
+```bash
+curl -X POST http://54.166.181.144:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "test@example.com",
+    "password": "Test123!"
+  }'
+```
+
+### 3. Usar el API
+
+```bash
+TOKEN="<tu_access_token>"
+
+curl -X GET http://54.166.181.144:3000/patients \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+---
+
+## 🛠️ Desarrollo local
+
+Si estás desarrollando localmente con Docker:
+
+```bash
+# 1. Levantar infraestructura
+npm run docker:up
+
+# 2. Aplicar schema (solo primera vez)
+docker exec -i postgres_db psql -U admin -d nestjs_db < full-schema.sql
+docker exec -i postgres_db psql -U admin -d nestjs_db < manual-seed.sql
+
+# 3. API disponible en
+# http://localhost:3000
+```
+
+**Panel de colas**: `http://localhost:3000/admin/queues`
+
+---
+
+## 📌 Notas importantes
+
+- ⚠️ **CORS**: La API acepta peticiones desde cualquier origen en desarrollo
+- 🔒 **JWT**: Los tokens expiran después de 24 horas
+- 📦 **BigInt**: Los IDs se devuelven como números en JSON
+- 🗄️ **PostgreSQL**: Base de datos con schema `app`
+- 🔴 **Redis**: Cache y colas de mensajes
 
