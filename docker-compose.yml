@@ -16,6 +16,7 @@ services:
       # Initialize schema + seed data on first boot
       - ./full-schema.sql:/docker-entrypoint-initdb.d/001-schema.sql:ro
       - ./manual-seed.sql:/docker-entrypoint-initdb.d/002-seed.sql:ro
+      - ./apply-indexes.sql:/docker-entrypoint-initdb.d/003-indexes.sql:ro
     networks:
       - app-network
 

@@ -161,6 +161,66 @@ CREATE TABLE "app"."alertas" (
 );
 
 -- CreateTable
+CREATE TABLE "app"."alergias" (
+    "id" BIGSERIAL NOT NULL,
+    "paciente_id" BIGINT NOT NULL,
+    "alergeno" VARCHAR(255) NOT NULL,
+    "reaccion" VARCHAR(255) NOT NULL,
+    "severidad" VARCHAR(50) NOT NULL,
+    "notas" TEXT,
+    "creado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "actualizado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "alergias_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "app"."medicamentos" (
+    "id" BIGSERIAL NOT NULL,
+    "paciente_id" BIGINT NOT NULL,
+    "nombre" VARCHAR(255) NOT NULL,
+    "dosis" VARCHAR(100),
+    "frecuencia" VARCHAR(100),
+    "fecha_inicio" DATE,
+    "fecha_fin" DATE,
+    "activo" BOOLEAN NOT NULL DEFAULT true,
+    "creado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "medicamentos_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "app"."antecedentes_familiares" (
+    "id" BIGSERIAL NOT NULL,
+    "paciente_id" BIGINT NOT NULL,
+    "parentesco" VARCHAR(50) NOT NULL,
+    "condicion" VARCHAR(255) NOT NULL,
+    "notas" TEXT,
+    "creado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "antecedentes_familiares_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "app"."estilo_vida_detalle" (
+    "id" BIGSERIAL NOT NULL,
+    "paciente_id" BIGINT NOT NULL,
+    "dieta" VARCHAR(100),
+    "consumo_alcohol" VARCHAR(100),
+    "consumo_tabaco" VARCHAR(100),
+    "nivel_actividad" VARCHAR(100),
+    "horas_sueno" DECIMAL(4,2),
+    "estres_nivel" SMALLINT,
+    "actividad_fisica_tipo" VARCHAR(255),
+    "actividad_fisica_frecuencia" VARCHAR(100),
+    "notas" TEXT,
+    "creado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "actualizado_en" TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "estilo_vida_detalle_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "app"."eventos_alerta" (
     "id" BIGSERIAL NOT NULL,
     "alerta_id" BIGINT NOT NULL,
