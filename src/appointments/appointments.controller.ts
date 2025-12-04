@@ -19,6 +19,21 @@ export class AppointmentsController {
     return this.appointmentsService.findAll();
   }
 
+  @Get('available-doctors')
+  getAvailableDoctors() {
+    return this.appointmentsService.getAvailableDoctors();
+  }
+
+  @Get('available-nurses')
+  getAvailableNurses() {
+    return this.appointmentsService.getAvailableNurses();
+  }
+
+  @Get('service-types')
+  getServiceTypes() {
+    return this.appointmentsService.getServiceTypes();
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.appointmentsService.findOne(+id);

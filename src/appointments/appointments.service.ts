@@ -63,4 +63,61 @@ export class AppointmentsService {
       },
     });
   }
+
+  async getAvailableDoctors() {
+    // Get users with role 'doctor'
+    const doctorRole = await this.prisma.role.findUnique({ where: { name: 'doctor' } });
+    if (!doctorRole) return [];
+
+    return this.prisma.user.findMany({
+      where: {
+        roleId: doctorRole.id,
+        isActive: true,
+      },
+      select: {
+        id: true,
+        email: true,
+        role: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+  }
+
+  async getAvailableNurses() {
+    // Get users with role 'nurse'
+    const nurseRole = await this.prisma.role.findUnique({ where: { name: 'nurse' } });
+    if (!nurseRole) return [];
+
+    return this.prisma.user.findMany({
+      where: {
+        roleId: nurseRole.id,
+        isActive: true,
+      },
+      select: {
+        id: true,
+        email: true,
+        role: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    });
+  }
+
+  async getServiceTypes() {
+    return this.prisma.serviceType.findMany({
+      where: {
+        isActive: true,
+      },
+      select: {
+        id: true,
+        code: true,
+        name: true,
+      },
+    });
+  }
 }

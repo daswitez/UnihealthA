@@ -1,98 +1,257 @@
-## Appointments – Citas y agenda
+# Appointments API - Citas Médicas
 
-- **Base path**: `/appointments`
-- **Auth**: requiere `Bearer <token>`
+**Base URL**: `http://54.166.181.144:3000/appointments`  
+**Auth**: Requiere `Bearer <token>`
 
-Gestiona citas entre pacientes y enfermeros, con control de solapamientos.
+Sistema completo para gestión de citas médicas entre pacientes y enfermeras/doctores.
 
-### 1. Crear cita
+---
 
-- **POST** `/appointments`
-- Body (`CreateAppointmentDto`):
+## 📋 Endpoints de Consulta
 
-```json
-{
-  "patientId": 1,
-  "nurseId": 2,
-  "serviceTypeId": 1,
-  "start": "2025-11-24T09:00:00.000Z",
-  "end": "2025-11-24T09:30:00.000Z",
-  "reason": "Chequeo general"
-}
+### 1. Listar todas las citas
+
+```http
+GET http://54.166.181.144:3000/appointments
+Authorization: Bearer <token>
 ```
 
-Reglas:
-- Si el enfermero ya tiene una cita que se solapa en ese intervalo (excepto canceladas), devuelve `400` con mensaje:
-  - `"El enfermero ya tiene una cita en ese horario."`
-
-### 2. Listar citas
-
-- **GET** `/appointments`
-
-Incluye paciente, enfermero y tipo de servicio:
-
+**Respuesta:**
 ```json
 [
   {
-    "id": 1,
-    "patientId": 1,
-    "nurseId": 2,
-    "serviceTypeId": 1,
-    "start": "2025-11-24T09:00:00.000Z",
-    "end": "2025-11-24T09:30:00.000Z",
-    "status": "solicitada",
-    "reason": "Chequeo general"
+    "id": "1",
+    "patientId": "2",
+    "nurseId": "5",
+    "serviceTypeId": "1",
+    "start": "2024-12-10T10:00:00Z",
+    "end": "2024-12-10T11:00:00Z",
+    "status": "confirmada",
+    "reason": "Chequeo mensual",
+    "patient": {
+      "id": "2",
+      "email": "patient@example.com"
+    },
+    "nurse": {
+      "id": "5",
+      "email": "nurse.lopez@unihealth.com"
+    },
+    "serviceType": {
+      "id": "1",
+      "code": "CHECKUP",
+      "name": "Chequeo General"
+    }
   }
 ]
 ```
 
-### 3. Obtener cita concreta
+---
 
-- **GET** `/appointments/:id`
+### 2. Obtener médicos disponibles
 
-### 4. Actualizar estado de una cita
+```http
+GET http://54.166.181.144:3000/appointments/available-doctors
+Authorization: Bearer <token>
+```
 
-- **PATCH** `/appointments/:id/status`
-- Body (`UpdateAppointmentDto` típico):
+Lista todos los médicos activos que pueden atender citas.
 
+**Respuesta:**
 ```json
+[
+  {
+    "id": "5",
+    "email": "dr.martinez@unihealth.com",
+    "role": {
+      "name": "doctor"
+    }
+  },
+  {
+    "id": "6",
+    "email": "dr.rodriguez@unihealth.com",
+    "role": {
+      "name": "doctor"
+    }
+  }
+]
+```
+
+**Ejemplo JavaScript:**
+```javascript
+const getDoctors = async (token) => {
+  const response = await fetch('http://54.166.181.144:3000/appointments/available-doctors', {
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return response.json();
+};
+```
+
+---
+
+### 3. Obtener enfermeras disponibles
+
+```http
+GET http://54.166.181.144:3000/appointments/available-nurses
+Authorization: Bearer <token>
+```
+
+Lista todas las enfermeras activas que pueden atender citas.
+
+**Respuesta:**
+```json
+[
+  {
+    "id": "15",
+    "email": "nurse.lopez@unihealth.com",
+    "role": {
+      "name": "nurse"
+    }
+  }
+]
+```
+
+---
+
+### 4. Obtener tipos de servicio
+
+```http
+GET http://54.166.181.144:3000/appointments/service-types
+Authorization: Bearer <token>
+```
+
+Lista todos los tipos de servicios médicos disponibles.
+
+**Respuesta:**
+```json
+[
+  {
+    "id": "1",
+    "code": "CHECKUP",
+    "name": "Chequeo General"
+  },
+  {
+    "id": "2",
+    "code": "EMERGENCY",
+    "name": "Urgencia"
+  }
+]
+```
+
+---
+
+### 5. Obtener cita por ID
+
+```http
+GET http://54.166.181.144:3000/appointments/:id
+Authorization: Bearer <token>
+```
+
+---
+
+## 📝 Endpoints de Creación y Modificación
+
+### 6. Crear nueva cita
+
+```http
+POST http://54.166.181.144:3000/appointments
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "patientId": 2,
+  "nurseId": 15,
+  "serviceTypeId": 1,
+  "start": "2024-12-10T10:00:00Z",
+  "end": "2024-12-10T11:00:00Z",
+  "reason": "Chequeo mensual"
+}
+```
+
+**Campos:**
+- `patientId` (number, requerido) - ID del paciente
+- `nurseId` (number, requerido) - ID de la enfermera/doctor
+- `serviceTypeId` (number, requerido) - ID del tipo de servicio
+- `start` (string ISO date, requerido) - Fecha/hora de inicio
+- `end` (string ISO date, requerido) - Fecha/hora de fin
+- `reason` (string, opcional) - Motivo de la cita
+
+**Validaciones automáticas:**
+- ✅ Detecta conflictos de horario
+- ✅ No permite citas superpuestas
+- ⚠️ Retorna error 400 si hay conflicto
+
+**Ejemplo JavaScript:**
+```javascript
+const createAppointment = async (token, appointmentData) => {
+  const response = await fetch('http://54.166.181.144:3000/appointments', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(appointmentData),
+  });
+  return response.json();
+};
+```
+
+---
+
+### 7. Actualizar estado de cita
+
+```http
+PATCH http://54.166.181.144:3000/appointments/:id/status
+Authorization: Bearer <token>
+Content-Type: application/json
+
 {
   "status": "confirmada"
 }
 ```
 
-Valores de estado habituales: `"solicitada"`, `"confirmada"`, `"cancelada"`, etc.
+**Estados válidos:**
+- `solicitada` - Estado inicial
+- `confirmada` - Cita confirmada
+- `completada` - Cita realizada
+- `cancelada` - Cita cancelada
 
 ---
 
-### Consumo desde frontend
+## 💡 Flujo completo para agendar una cita
 
-```ts
-export const createAppointment = (
-  token: string,
-  payload: {
-    patientId: number;
-    nurseId: number;
-    serviceTypeId: number;
-    start: string;
-    end: string;
-    reason?: string;
+```javascript
+const token = localStorage.getItem('token');
+
+// 1. Obtener opciones disponibles
+const [nurses, services] = await Promise.all([
+  fetch('http://54.166.181.144:3000/appointments/available-nurses', {
+    headers: { 'Authorization': `Bearer ${token}` }
+  }).then(r => r.json()),
+  fetch('http://54.166.181.144:3000/appointments/service-types', {
+    headers: { 'Authorization': `Bearer ${token}` }
+  }).then(r => r.json())
+]);
+
+// 2. Crear la cita
+const appointmentData = {
+  patientId: 2,
+  nurseId: nurses[0].id,
+  serviceTypeId: services[0].id,
+  start: '2024-12-10T10:00:00Z',
+  end: '2024-12-10T11:00:00Z',
+  reason: 'Chequeo de rutina',
+};
+
+const newAppointment = await fetch('http://54.166.181.144:3000/appointments', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json',
   },
-) =>
-  apiFetch('/appointments', {
-    method: 'POST',
-    body: JSON.stringify(payload),
-  }, token);
+  body: JSON.stringify(appointmentData),
+}).then(r => r.json());
 
-export const updateAppointmentStatus = (
-  token: string,
-  appointmentId: number,
-  status: string,
-) =>
-  apiFetch(`/appointments/${appointmentId}/status`, {
-    method: 'PATCH',
-    body: JSON.stringify({ status }),
-  }, token);
+console.log('Cita creada:', newAppointment);
 ```
-
-
