@@ -109,20 +109,6 @@ Ejemplo de error:
 
 ## Módulos documentados
 
-Cada módulo tiene su propio archivo en `docs/` con detalles de endpoints y ejemplos:
-
-- `docs/auth.md` – Registro y login, uso de JWT.
-- `docs/users.md` – Gestión de usuarios.
-- `docs/patients.md` – CRUD de pacientes.
-- `docs/clinical-records.md` – Historia clínica.
-- `docs/vitals.md` – Signos vitales.
-- `docs/medical-history.md` – **Historias médicas completas (35+ endpoints)** con control de acceso granular.
-- `docs/alerts.md` – Alertas y asignación a enfermeros.
-- `docs/appointments.md` – Citas y agenda.
-- `docs/attachments.md` – Subida y descarga de adjuntos.
-- `docs/parameters.md` – Parámetros de sistema.
-- `docs/notifications.md` – Endpoints de notificaciones (stub actual).
-
 Consulta esos archivos para ver el detalle de cada CRUD y ejemplos de consumo desde frontend.
 
 
