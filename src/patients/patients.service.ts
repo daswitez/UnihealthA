@@ -36,7 +36,16 @@ export class PatientsService {
           lastName: createPatientDto.lastName,
           dob: new Date(createPatientDto.dob),
           gender: createPatientDto.gender,
-          // phone se pierde si no está en el modelo, agregarlo si es crítico
+          bloodGroup: createPatientDto.bloodGroup,
+          heightCm: createPatientDto.heightCm,
+          weightKg: createPatientDto.weightKg,
+          insurance: createPatientDto.insurance || {},
+          emergencyContact: createPatientDto.emergencyContact,
+          isSmoker: createPatientDto.isSmoker,
+          alcohol: createPatientDto.alcohol,
+          activity: createPatientDto.activity,
+          allergies: createPatientDto.allergies,
+          history: createPatientDto.history,
         },
       });
       
@@ -62,7 +71,7 @@ export class PatientsService {
   }
 
   update(id: number, updatePatientDto: UpdatePatientDto) {
-    const { firstName, lastName, dob, gender, ...rest } = updatePatientDto;
+    const { firstName, lastName, dob, gender, bloodGroup, heightCm, weightKg, insurance, emergencyContact, isSmoker, alcohol, activity, allergies, history } = updatePatientDto;
     
     return this.prisma.patientProfile.update({
       where: { userId: BigInt(id) },
@@ -71,6 +80,16 @@ export class PatientsService {
         lastName,
         dob: dob ? new Date(dob) : undefined,
         gender,
+        bloodGroup,
+        heightCm,
+        weightKg,
+        insurance,
+        emergencyContact,
+        isSmoker,
+        alcohol,
+        activity,
+        allergies,
+        history,
       },
     });
   }
