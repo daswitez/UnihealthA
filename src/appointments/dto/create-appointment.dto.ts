@@ -10,6 +10,10 @@ export class CreateAppointmentDto {
   @IsNumber()
   serviceTypeId: number;
 
+  @IsNumber()
+  @IsOptional()
+  kioskId?: number;
+
   @IsDateString()
   start: string;
 
@@ -20,3 +24,4 @@ export class CreateAppointmentDto {
   @IsString()
   reason?: string;
 }
+

@@ -15,6 +15,7 @@ import { AuditModule } from './audit/audit.module';
 import { ParametersModule } from './parameters/parameters.module';
 import { AccessModule } from './access/access.module';
 import { MedicalHistoryModule } from './medical-history/medical-history.module';
+import { KiosksModule } from './kiosks/kiosks.module';
 import { LoggerModule } from 'nestjs-pino';
 import { BullBoardModule } from '@bull-board/nestjs';
 import { ExpressAdapter } from '@bull-board/express';
@@ -59,6 +60,7 @@ import { AuditInterceptor } from './audit/audit.interceptor';
     ParametersModule,
     AccessModule,
     MedicalHistoryModule,
+    KiosksModule,
   ],
   controllers: [],
   providers: [

@@ -32,21 +32,23 @@ export class AppointmentsService {
         patientId: createAppointmentDto.patientId,
         nurseId: createAppointmentDto.nurseId,
         serviceTypeId: createAppointmentDto.serviceTypeId,
+        kioskId: createAppointmentDto.kioskId,
         start,
         end,
         reason: createAppointmentDto.reason,
         status: 'solicitada',
       },
-      include: { patient: true, nurse: true, serviceType: true },
+      include: { patient: true, nurse: true, serviceType: true, kiosk: true },
     });
   }
 
   findAll() {
     return this.prisma.appointment.findMany({
-      include: { patient: true, nurse: true, serviceType: true },
+      include: { patient: true, nurse: true, serviceType: true, kiosk: true },
       orderBy: { start: 'asc' },
     });
   }
+
 
   findOne(id: number) {
     return this.prisma.appointment.findUnique({

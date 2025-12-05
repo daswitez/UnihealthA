@@ -382,11 +382,51 @@ model Schedule {
   @@schema("app")
 }
 
+// ===========================
+// 4.1) Kioscos médicos
+// ===========================
+
+model Kiosk {
+  id          BigInt   @id @default(autoincrement())
+  name        String   @map("nombre") @db.VarChar(100)
+  address     String   @map("direccion") @db.VarChar(255)
+  city        String   @map("ciudad") @db.VarChar(100)
+  latitude    Decimal? @map("latitud") @db.Decimal(9, 6)
+  longitude   Decimal? @map("longitud") @db.Decimal(9, 6)
+  phone       String?  @map("telefono") @db.VarChar(20)
+  openTime    String?  @map("hora_apertura") @db.VarChar(5)
+  closeTime   String?  @map("hora_cierre") @db.VarChar(5)
+  isActive    Boolean  @default(true) @map("activo")
+  createdAt   DateTime @default(now()) @map("creado_en") @db.Timestamptz
+  updatedAt   DateTime @default(now()) @updatedAt @map("actualizado_en") @db.Timestamptz
+
+  staff        KioskStaff[]
+  appointments Appointment[]
+
+  @@map("kioscos")
+  @@schema("app")
+}
+
+model KioskStaff {
+  id         BigInt   @id @default(autoincrement())
+  kioskId    BigInt   @map("kiosco_id")
+  userId     BigInt   @map("usuario_id")
+  assignedAt DateTime @default(now()) @map("asignado_en") @db.Timestamptz
+
+  kiosk Kiosk @relation(fields: [kioskId], references: [id], onDelete: Cascade)
+
+  @@unique([kioskId, userId])
+  @@index([userId])
+  @@map("kiosco_personal")
+  @@schema("app")
+}
+
 model Appointment {
   id            BigInt   @id @default(autoincrement())
   patientId     BigInt   @map("paciente_id")
   nurseId       BigInt   @map("enfermero_id")
   serviceTypeId BigInt   @map("tipo_servicio_id")
+  kioskId       BigInt?  @map("kiosco_id")
   start         DateTime @map("inicio") @db.Timestamptz
   end           DateTime @map("fin") @db.Timestamptz
   status        String   @default("solicitada") @map("estado") @db.VarChar(20)
@@ -396,12 +436,15 @@ model Appointment {
   patient     User        @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
   nurse       User        @relation("NurseAppointments", fields: [nurseId], references: [id])
   serviceType ServiceType @relation(fields: [serviceTypeId], references: [id])
+  kiosk       Kiosk?      @relation(fields: [kioskId], references: [id])
 
   @@index([nurseId, start, end])
   @@index([patientId, start])
+  @@index([kioskId])
   @@map("citas")
   @@schema("app")
 }
+
 
 // ===========================
 // 5) Auditoría y configuración
